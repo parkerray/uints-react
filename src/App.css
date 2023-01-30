@@ -1,0 +1,36 @@
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+* {
+  font-family: Bebas Neue, sans-serif;
+  font-size: 22px;
+  line-height: 100%;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+svg {
+  width: 100%;
+  margin: 70px 0px 32px 0px;
+}
+
+.numberButton {
+  border: 0;
+  border-radius: 0;
+  background-color: #fff;
+  color: #0c0c0c;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 5px;
+  padding: 8px 16px 4px 16px;
+  cursor: pointer;
+}
+
+.numberButton:hover {
+  background-color: #ddd;
+}

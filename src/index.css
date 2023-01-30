@@ -1,0 +1,80 @@
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+:root {
+  font-family: Bebas Neue, sans-serif;
+  font-size: 22px;
+  line-height: 150%;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  color: #fff;
+  background-color: #0c0c0c;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.6em;
+  font-weight: 400;
+  margin: 4px;
+}
+
+h2.smaller {
+  font-size: 1.2em;
+}
+
+.section {
+  margin: 70px auto;
+  padding: 0 5%;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+#svg {
+  width: 100%;
+  max-width: 400px;
+  margin: 70px 0px 32px 0px;
+}

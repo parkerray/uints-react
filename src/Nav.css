@@ -1,0 +1,22 @@
+.nav {
+  padding: 26px 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: rgba(255, 255, 255, .1) 2px solid;
+}
+
+.nav-links {
+  display: flex;
+  gap: 26px;
+}
+
+#logo {
+  width: 24px;
+  margin: 0;
+}
+
+a {
+  line-height: 100%;
+}
