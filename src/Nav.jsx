@@ -1,15 +1,16 @@
 import './Nav.css'
+import { Link } from 'react-router-dom'
 
 function Nav() {
 
   return (
     <nav className="nav">
-      <a href="/">
+      <Link to ={`/`}>
         <img id="logo" src="/logo.svg" />
-      </a>
+      </Link>
       <div className="nav-links">
-        <a href="/">About</a>
-        <a href="/">Mint</a>
+        <Link to={`/about`}>About</Link>
+        <Link to={`/mint`}>Mint</Link>
       </div>
     </nav>
   )
