@@ -6,9 +6,9 @@ import About from './About'
 import Root from './routes/root'
 import ErrorPage from './error-page'
 import './index.css'
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
