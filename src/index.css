@@ -54,6 +54,13 @@ h2.smaller {
   margin: auto;
 }
 
+.container.flex {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: stretch;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -71,10 +78,4 @@ h2.smaller {
 .icon {
   width: 24px;
   height: 24px;
-}
-
-#svg {
-  width: 100%;
-  max-width: 400px;
-  margin: 70px 0px 32px 0px;
 }

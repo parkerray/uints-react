@@ -15,22 +15,41 @@
 }
 
 svg {
+  display: block;
   width: 100%;
-  margin: 70px 0px 32px 0px;
+  max-width: 600px;
+  margin: 70px auto 32px auto;
 }
 
 .numberButton {
-  border: 0;
+  border: #fff solid 1px;
   border-radius: 0;
-  background-color: #fff;
-  color: #0c0c0c;
+  background-color: #0c0c0c;
+  color: #fff;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 400;
   margin: 5px;
   padding: 8px 16px 4px 16px;
   cursor: pointer;
 }
 
 .numberButton:hover {
-  background-color: #ddd;
+  background-color: #222;
+}
+
+.buttonWrapper {
+  display: block;
+  margin: auto;
+}
+
+.heading {
+  font-size: 2.2em;
+  font-weight: 400;
+  margin: auto;
+}
+
+.sub {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin: 0 auto 16px auto;
 }
