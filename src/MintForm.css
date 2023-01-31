@@ -61,8 +61,7 @@ button.increment {
   font-size: 1.4em;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .label {
