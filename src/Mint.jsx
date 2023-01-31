@@ -4,11 +4,11 @@ import {
   walletConnectProvider,
 } from "@web3modal/ethereum";
 
-import { Web3Modal, useWeb3Modal, Web3Button } from "@web3modal/react";
+import { Web3Modal, Web3Button } from "@web3modal/react";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { goerli, mainnet } from "wagmi/chains";
 
-import MintButton from './MintButton';
+import MintForm from './MintForm';
 
 const chains = [goerli,mainnet];
 
@@ -33,8 +33,7 @@ function Mint() {
       <WagmiConfig client={wagmiClient}>
           <div className="section">
             <div className="container">
-              <h1>Mint</h1>
-							<MintButton />
+							<MintForm />
               <Web3Button />
             </div>
           </div>
