@@ -7,6 +7,7 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { goerli, mainnet } from "wagmi/chains";
 import { Web3Button } from "@web3modal/react";
+import { sendTransaction } from '@wagmi/core'
 
 
 const chains = [goerli,mainnet];
@@ -23,6 +24,10 @@ const wagmiClient = createClient({
 
 // Web3Modal Ethereum Client
 const ethereumClient = new EthereumClient(wagmiClient, chains);
+
+function sendMint() {
+  
+}
 
 function Mint() {
   return (
