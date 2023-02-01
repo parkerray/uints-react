@@ -1,5 +1,6 @@
 .nav {
-  padding: 26px 5%;
+  padding: 0 5%;
+  height: 60px;
   left: 0;
   right: 0;
   display: flex;
@@ -9,8 +10,7 @@
   border-bottom: rgba(255, 255, 255, .1) 2px solid;
   position: fixed;
   top: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: #0c0c0c;
 }
 
 .nav-links {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function Number({value}) {
   return (
-    <div dangerouslySetInnerHTML={{__html: renderSvg(value)}} />
+    <div className='numberWrapper' dangerouslySetInnerHTML={{__html: renderSvg(value)}} />
   )
 }
 

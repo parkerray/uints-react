@@ -58,7 +58,7 @@ export default function MintForm() {
     if (value > 0 && value <= 50) {
       return `mint Ξ${(quantity * .003).toFixed(3)}`;
     } else {
-      return `enter quantity`;
+      return `qty must be 1-50`;
     }
   }
 

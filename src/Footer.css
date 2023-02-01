@@ -3,7 +3,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 10px 5%;
+  padding: 0 5%;
+  height: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +17,7 @@
 }
 
 .icon {
-  width: 20px;
+  width: 18px;
   opacity: 50%;
 }
 
@@ -27,5 +28,5 @@
 #right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }

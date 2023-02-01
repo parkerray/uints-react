@@ -44,21 +44,30 @@ h2.smaller {
 }
 
 .section {
-  margin: 120px auto;
-  padding: 0 5%;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  bottom: 40px;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
   max-width: 800px;
-  margin: auto;
+  margin: 2% auto;
+  padding: 0 5%;
 }
 
 .container.flex {
   display: flex;
   flex-direction: column;
   align-content: center;
-  align-items: stretch;
+  align-items: center;
 }
 
 .hero {
@@ -73,9 +82,4 @@ h2.smaller {
   align-items: center;
   gap: 12px;
   margin-top: 16px;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
 }
