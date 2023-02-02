@@ -1,36 +1,37 @@
-.box {
-  padding: 6px;
+.form-wrapper {
+  width: 300px;
+}
+
+.outlined-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  border: 1px solid #fff;
   background-color: #0c0c0c;
   color: #fff;
-  display: flex;
-  align-items: center;
-  border: #fff 1px solid;
-  text-align: center;
-  box-sizing:border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-input.box {
-  width: 100%;
+.large {
+  padding: 24px;
   font-size: 3em;
-  font-weight: 700;
-  padding-bottom: 24px;
-  padding-top: 30px;
+  text-align: center;
+  font-weight: 600;
 }
 
-.incrementButtons {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-}
-
-button.increment {
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  padding: 16px;
+.small {
+  padding: 12px;
   cursor: pointer;
+  transition:cubic-bezier(1, 0, 0, 1);
+  transition-duration: 200ms;
+}
+
+.small:hover {
+  background-color: rgba(255,255,255,.1);
 }
 
 .buttonSvg {
@@ -38,34 +39,25 @@ button.increment {
   width: 24px;
 }
 
-.quantityFormWrapper {
-  max-width: 400px;
-}
-
-.quantityForm {
-  text-align: center;
-  display: block;
+.mint-button {
   display: flex;
-  flex-direction: column;
+  margin-top: 12px;
+  padding: 18px;
+  justify-content: center;
   align-items: center;
-  align-content: center;
-}
-
-#mint {
-  width: 100%;
-  border: #0F2FD8 1px solid;
-  background-color: #0F2FD8;
+  border: #0f2fd8 1px solid;
+  background-color: #0f2fd8;
   color: #fff;
-  box-sizing: border-box;
-  padding: 24px;
+  width: 100%;
   font-size: 1.4em;
-  font-weight: 700;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
   cursor: pointer;
-  margin: 16px 0;
+  transition:cubic-bezier(1, 0, 0, 1);
+  transition-duration: 200ms;
 }
 
-.label {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 16px;
+.mint-button:hover {
+  background-color: #0b28b6;
 }

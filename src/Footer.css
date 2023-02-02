@@ -1,4 +1,4 @@
-.wrapper {
+.footer-wrapper {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -9,23 +9,25 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-top: rgba(255, 255, 255, .1) 2px solid;
+  border-top: #181818 2px solid;
   line-height: 100%;
   color: rgba(255, 255, 255, .5);
-  font-size: .6em;
+  font-size: .8em;
   background-color: #0c0c0c;
 }
 
 .icon {
   width: 18px;
   opacity: 50%;
+  transition:cubic-bezier(1, 0, 0, 1);
+  transition-duration: 200ms;
 }
 
 .icon:hover {
   opacity: 100%;
 }
 
-#right {
+.footer-right {
   display: flex;
   align-items: center;
   gap: 8px;

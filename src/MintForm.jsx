@@ -1,14 +1,13 @@
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi';
-import * as React from 'react';
 import { useState } from 'react';
-import './MintForm.css'
+import './MintForm.css';
 
 export default function MintForm() {
 
   const [quantity, setQuantity] = useState(1);
 
 	const { config } = usePrepareContractWrite({
-		address: '0xde1a286b5A74F7Ee0f4BE07255Bab15a30a5aFCA',
+	  address: '0xde1a286b5A74F7Ee0f4BE07255Bab15a30a5aFCA',
 		abi: [
       {
         "inputs": [
@@ -26,10 +25,10 @@ export default function MintForm() {
     ],
 		functionName: 'mint',
 		args: [quantity]
-	 })
-	 const { data, write } = useContractWrite(config);
+	})
+	  const { data, write } = useContractWrite(config);
 
-   const { isLoading, isSuccess } = useWaitForTransaction({
+    const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
 
@@ -63,20 +62,22 @@ export default function MintForm() {
   }
 
    return (
-    <div className='quantityFormWrapper'>
-      <div className='quantityForm'>
-        <span className='label'>Max 50 tokens per transaction</span>
-        <input className='box' value={quantity} onChange={handleChange}></input>
-        <div className='incrementButtons'>
-          <button className='box increment' onClick={decreaseQuantity}>
+    <div className='form-wrapper'>
+        <input 
+          className='outlined-input large'
+          value={quantity}
+          onChange={handleChange}
+          placeholder={'0'}
+        ></input>
+        <div className='flex'>
+          <button className='outlined-input small' onClick={decreaseQuantity}>
             <img className='buttonSvg' src='../subtract.svg'></img>
           </button>
-          <button className='box increment' onClick={increaseQuantity}>
+          <button className='outlined-input small' onClick={increaseQuantity}>
             <img className='buttonSvg' src='../add.svg'></img>
           </button>
-        </div>
       </div>
-      <button id='mint' disabled={!write || isLoading} onClick={() => write()}>
+      <button className='mint-button' disabled={!write || isLoading} onClick={() => write()}>
         {isLoading ? 'Minting...' : getMintText(quantity)}
       </button>
       {isSuccess && (

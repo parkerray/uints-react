@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import Mint from './Mint'
+import MintPage from './MintPage'
 import About from './About'
 import Root from './routes/root'
 import ErrorPage from './error-page'
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/mint",
-        element: <Mint />
+        element: <MintPage />
       },
       {
         path: "/about",

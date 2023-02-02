@@ -3,11 +3,11 @@ import './Footer.css'
 function Footer() {
 
   return (
-    <footer className="wrapper">
-      <div id='left'>
+    <footer className='footer-wrapper'>
+      <div className='footer-left'>
         <span>UINTS</span>
       </div>
-      <div id='right'>
+      <div className='footer-right'>
         <a href='/'>
           <img className='icon' src='../etherscan.svg' alt='etherscan'></img>
         </a>

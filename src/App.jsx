@@ -1,43 +1,38 @@
 import './App.css'
-import { renderSvg } from '../numberGenerator.js'
+import Segments from './Segments'
 import { useState } from 'react';
 
-function Number({value}) {
-  return (
-    <div className='numberWrapper' dangerouslySetInnerHTML={{__html: renderSvg(value)}} />
-  )
-}
+function countUp() {
+  let counter = 0;
+  setInterval(() => {
+  if (counter === 9999) {
+    clearInterval();
+    return;
+  }
+  counter++;
+  renderSvg(counter.toString());
+  }, 500);
 
-function Button({text,onClick}) {
-  return (
-    <button className="numberButton" onClick={onClick}>{text}</button>
-  )
 }
 
 function App() {
   const [count, setCount] = useState(0);
 
-  function handleClick(amount) {
-    if (count + amount <= 9999) {
-      setCount(count + amount);
-    }
+  function handleClick() {
+    setCount(Math.floor(Math.random() * 9999) + 1);
   }
 
   return (
-    <div className="App">
-      <div className="section">
-        <div className='container flex'>
-          <Number value={count} />
-          <h1 className='heading'>Numbers are art</h1>
-          <h2 className='sub'>and we are artists</h2>
-          <div className="buttonWrapper">
-            <Button text="+1" onClick={() => handleClick(1)} />
-            <Button text="+10" onClick={() => handleClick(10)} />
-            <Button text="+100" onClick={() => handleClick(100)} />
-          </div>
+    <>
+      <div className='section-full'>
+        <div className='container'>
+          <Segments value={count} />
+          <h1 className='hero-text'>Numbers are art</h1>
+          <h2 className='hero-text-sub'>& we are artists</h2>
+          <button className='button-outline' onClick={handleClick}>Paint a picture</button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
