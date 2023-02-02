@@ -189,6 +189,7 @@ p {
 .section-full {
   overflow: scroll;
   flex-direction: column;
+  align-items: center;
 }
 
 .left {
@@ -198,7 +199,6 @@ p {
   border: none;
   margin-bottom: 70px;
   justify-content: center;
-  align-items: flex-start;
   box-sizing: border-box;
 }
 
