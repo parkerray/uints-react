@@ -64,6 +64,10 @@ p {
   display: flex;
 }
 
+.disable-scroll {
+  overflow: hidden;
+}
+
 .section-split {
   position: fixed;
   left: 0px;
@@ -193,6 +197,7 @@ p {
 }
 
 .left {
+  height: auto;
   position: static;
   overflow: visible;
   width: 100%;
@@ -217,6 +222,7 @@ p {
 }
 
 .right {
+  height: auto;
   position: static;
   overflow: visible;
   width: 100%;

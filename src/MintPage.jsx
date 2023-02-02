@@ -6,11 +6,11 @@ function MintPage() {
   return (
     <>
 			<div className='section-split'>
-				<div className='left'>
+				<div className='left disable-scroll'>
 					<MintForm />
 				</div>
-				<div className='right'>
-					<div className='container'>
+				<div className='right disable-scroll'>
+					<div className='container disable-scroll'>
 						<div className='counter-wrapper'>
 							<div className='counter-card'>
 								<Segments value={3041} />

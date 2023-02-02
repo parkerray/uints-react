@@ -33,15 +33,13 @@ function About() {
             </p>
           </div>
 				</div>
-				<div className='right'>
-					<div className='container'>
+				<div className='right disable-scroll'>
 						<div className='counter-wrapper'>
 							<div className='counter-card'>
 								<Segments value={3041} />
 								<p className='counter-label'>Minted</p>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
     </>
