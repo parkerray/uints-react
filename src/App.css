@@ -16,3 +16,15 @@
   text-transform: uppercase;
   margin: 0;
 }
+
+@media (max-width: 991px) {
+
+.hero-text {
+  font-size: 2em;
+}
+
+.hero-text-sub {
+  font-size: 1em;
+}
+
+}
