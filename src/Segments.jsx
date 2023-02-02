@@ -9,7 +9,7 @@ function Segments({value}) {
 
   return (
     // <div className='numberWrapper' dangerouslySetInnerHTML={{__html: renderSvg(value)}} />
-    <img className='counter' src={b64}></img>
+    <img draggable='false' className='counter' src={b64}></img>
   );
 }
 
