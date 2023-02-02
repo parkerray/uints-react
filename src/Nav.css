@@ -27,3 +27,13 @@
 .nav a {
   padding: 6px;
 }
+
+@media (max-width: 991px) {
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+}
