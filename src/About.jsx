@@ -1,6 +1,17 @@
 import Segments from './Segments';
+import { useState, useEffect } from 'react';
 
 function About() {
+
+  const [value,setValue] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setValue(value + 1);
+		}, 100);
+		return () => clearInterval(interval);
+	}, [value]);
+
   return (
     <>
 			<div className='section-split'>
@@ -36,8 +47,8 @@ function About() {
 				<div className='right disable-scroll'>
 						<div className='counter-wrapper'>
 							<div className='counter-card'>
-								<Segments value={3041} />
-								<p className='counter-label'>Minted</p>
+								<Segments value={value} />
+								<p className='counter-label'>Numbers are art</p>
 							</div>
 						</div>
 				</div>
