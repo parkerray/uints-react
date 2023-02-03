@@ -17,6 +17,8 @@ export default function MintForm({contractAddress,cost}) {
   const [quantity, setQuantity] = useState(1);
   const [limit, setLimit] = useState(50);
   const [isFreeRoute, setIsFreeRoute] = useState(false);
+  const [showForm, setShowForm] = useState(true);
+  const [freeMints, setFreeMints] = useState(0);
 
   useEffect(() => {
     setIsFreeRoute(window.location.pathname.endsWith('/free'));
@@ -55,6 +57,7 @@ export default function MintForm({contractAddress,cost}) {
         const amt = parseInt(data._hex, 16);
         if (isFreeRoute && amt > 0) {
           setLimit(amt);
+          setFreeMints(amt);
           console.log(`${address} has ${amt} free mints`)
         } else {
           setLimit(50);
@@ -89,7 +92,12 @@ export default function MintForm({contractAddress,cost}) {
     },
 	})
 
-  const { data, write } = useContractWrite(config);
+  const { data, write } = useContractWrite({
+    ...config,
+    onSuccess() {
+      setShowForm(false);
+    }
+  });
 
   const { isLoading, isSuccess, isError } = useWaitForTransaction({
     hash: data?.hash,
@@ -140,31 +148,40 @@ export default function MintForm({contractAddress,cost}) {
   if (isConnected)
    return (
     <div className='form-wrapper'>
-        <input 
-          className='outlined-input large'
-          value={quantity}
-          onChange={handleChange}
-          placeholder={'0'}
-        ></input>
-        <div className='flex'>
-          <button className='outlined-input small' onClick={decreaseQuantity}>
-            <img className='buttonSvg' src='../subtract.svg'></img>
-          </button>
-          <button className='outlined-input small' onClick={increaseQuantity}>
-            <img className='buttonSvg' src='../add.svg'></img>
-          </button>
-      </div>
-      <button 
-        className='mint-button'
-        disabled={isLoading || isError}
-        onClick={handleMintClick}
-      >
-        {isLoading ? 'Minting...' : (isConnected ? getMintText(quantity) : 'CONNECT')}
-      </button>
+      {(isFreeRoute || freeMints > 0) || (!isFreeRoute) && (
+      <>
+        {showForm && (
+        <>
+          <input 
+            className='outlined-input large'
+            value={quantity}
+            onChange={handleChange}
+            placeholder={'0'}
+          ></input>
+          <div className='flex'>
+            <button className='outlined-input small' onClick={decreaseQuantity}>
+              <img className='buttonSvg' src='../subtract.svg'></img>
+            </button>
+            <button className='outlined-input small' onClick={increaseQuantity}>
+              <img className='buttonSvg' src='../add.svg'></img>
+            </button>
+        </div>
+      </>
+      )}
+        <button 
+          className='mint-button'
+          disabled={isLoading || isError || isSuccess}
+          onClick={handleMintClick}>
+          {isLoading ? 'Minting...' : isSuccess ? 'Success!' : (isConnected ? getMintText(quantity) : 'CONNECT')}
+        </button>
       {isSuccess && (
         <div className='successMessage'>
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>Success! View tx on etherscan</a>
+            <a href={`https://etherscan.io/tx/${data?.hash}`}>View tx on etherscan</a>
         </div>
+      )}
+      </>)}
+      {isFreeRoute && freeMints == 0 && (
+        <a className='successMessage' href='/mint'>You have no free mints</a>
       )}
     </div>
    )
