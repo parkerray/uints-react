@@ -3,20 +3,69 @@ import {
   useContractWrite,
   useWaitForTransaction,
   useAccount,
+  useContractRead,
 } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/react';
+import { ethers } from 'ethers';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './MintForm.css';
 
-export default function MintForm() {
+export default function MintForm({contractAddress,cost}) {
 
+  //define states
   const [quantity, setQuantity] = useState(1);
-  
-  const { isConnected } = useAccount();
+  const [limit, setLimit] = useState(50);
+  const [isFreeRoute, setIsFreeRoute] = useState(false);
+
+  useEffect(() => {
+    setIsFreeRoute(window.location.pathname.endsWith('/free'));
+  }, []);
+
+  const { isConnected, address } = useAccount();
+
+  //check for free mints
+  {
+    const { data } = useContractRead({
+      address: contractAddress,
+      functionName: 'getRemaining',
+      abi: [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "addy",
+              "type": "address"
+            }
+          ],
+          "name": "getRemaining",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+      ],
+      args: [address],
+      onSuccess(data) {
+        const amt = parseInt(data._hex, 16);
+        if (isFreeRoute && amt > 0) {
+          setLimit(amt);
+          console.log(`${address} has ${amt} free mints`)
+        } else {
+          setLimit(50);
+          console.log(`${address} has 0 free mints`)
+        }
+      },
+    })
+  }
 
 	const { config } = usePrepareContractWrite({
-	  address: '0xde1a286b5A74F7Ee0f4BE07255Bab15a30a5aFCA',
+	  address: contractAddress,
 		abi: [
       {
         "inputs": [
@@ -33,16 +82,20 @@ export default function MintForm() {
       },
     ],
 		functionName: 'mint',
-		args: [quantity]
+		args: [quantity],
+    overrides: {
+      from: address,
+      value: ethers.utils.parseEther(cost) * quantity,
+    },
 	})
-	  const { data, write } = useContractWrite(config);
 
-    const { isLoading, isSuccess } = useWaitForTransaction({
+  const { data, write } = useContractWrite(config);
+
+  const { isLoading, isSuccess, isError } = useWaitForTransaction({
     hash: data?.hash,
   })
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     if (event.target.value > 0) {
       setQuantity(parseInt(event.target.value));
     } else {
@@ -51,7 +104,7 @@ export default function MintForm() {
   }
 
   const increaseQuantity = () => {
-    if (quantity >= 0 && quantity <= 49) {
+    if (quantity >= 0 && quantity < limit) {
       setQuantity(quantity + 1);
     }
   }
@@ -63,10 +116,14 @@ export default function MintForm() {
   }
 
   const getMintText = (value) => {
-    if (value > 0 && value <= 50) {
-      return `mint Ξ${(quantity * .003).toFixed(3)}`;
+    if (value <= limit) {
+      if (cost == '0') {
+        return `Mint for free`
+      } else {
+        return `Mint Ξ${(quantity * .002).toFixed(3)}`;
+      }
     } else {
-      return `qty must be 1-50`;
+      return `limit is ${limit}`;
     }
   }
 
@@ -80,6 +137,7 @@ export default function MintForm() {
     }
   }
 
+  if (isConnected)
    return (
     <div className='form-wrapper'>
         <input 
@@ -98,17 +156,14 @@ export default function MintForm() {
       </div>
       <button 
         className='mint-button'
-        disabled={isLoading}
+        disabled={isLoading || isError}
         onClick={handleMintClick}
       >
         {isLoading ? 'Minting...' : (isConnected ? getMintText(quantity) : 'CONNECT')}
       </button>
       {isSuccess && (
-        <div>
-          Successfully minted your NFT!
-          <div>
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>view tx on etherscan</a>
-          </div>
+        <div className='successMessage'>
+            <a href={`https://etherscan.io/tx/${data?.hash}`}>Success! View tx on etherscan</a>
         </div>
       )}
     </div>

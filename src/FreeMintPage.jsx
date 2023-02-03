@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { getTotalSupply } from '../alchemyAPI';
 
-function MintPage() {
+function FreeMintPage() {
 	const [supply,setSupply] = useState('');
 	const [minutes,setMinutes] = useState('');
 	const contractAddress = '0xABc6908AD1fcF5B6974dBbfff29dC47Ebf82A59e';
@@ -32,7 +32,7 @@ function MintPage() {
     <>
 			<div className='section-split'>
 				<div className='left disable-scroll'>
-					<MintForm contractAddress={contractAddress} cost={'0.002'} />
+					<MintForm contractAddress={contractAddress} cost={'0'} />
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>
@@ -53,4 +53,4 @@ function MintPage() {
   );
 }
 
-export default MintPage;
+export default FreeMintPage;

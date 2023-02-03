@@ -61,3 +61,10 @@
 .mint-button:hover {
   background-color: #0b28b6;
 }
+
+.successMessage {
+  text-transform: uppercase;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: underline;
+}

@@ -7,6 +7,7 @@ const settings = {
 
 const alchemy = new Alchemy(settings);
 
-export async function getTotalSupply() {
-  return alchemy.nft.getContractMetadata('0xde1a286b5A74F7Ee0f4BE07255Bab15a30a5aFCA')
+export async function getTotalSupply(address) {
+  const result = await alchemy.nft.getContractMetadata(address);
+  return result.totalSupply;
 }

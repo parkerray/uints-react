@@ -32,6 +32,7 @@ const renderStyles = (p, number) => {
 }
 
 export function renderSvg(value) {
+  if (value != undefined);
   let array = splitNumber(value.toString());
   let count = array.length;
   let start = 3;

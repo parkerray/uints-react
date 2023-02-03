@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import MintPage from './MintPage'
+import FreeMintPage from './FreeMintPage'
 import About from './About'
 import Root from './routes/root'
 import ErrorPage from './error-page'
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/free",
+        element: <FreeMintPage />
       }
     ]
   }
