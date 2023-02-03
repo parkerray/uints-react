@@ -1,10 +1,19 @@
-import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { 
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+  useAccount,
+} from 'wagmi';
+import { useWeb3Modal } from '@web3modal/react';
+
 import { useState } from 'react';
 import './MintForm.css';
 
 export default function MintForm() {
 
   const [quantity, setQuantity] = useState(1);
+  
+  const { isConnected } = useAccount();
 
 	const { config } = usePrepareContractWrite({
 	  address: '0xde1a286b5A74F7Ee0f4BE07255Bab15a30a5aFCA',
@@ -61,6 +70,16 @@ export default function MintForm() {
     }
   }
 
+  const { open } = useWeb3Modal();
+
+  const handleMintClick = () => {
+    if (isConnected) {
+      write();
+    } else {
+      open();
+    }
+  }
+
    return (
     <div className='form-wrapper'>
         <input 
@@ -77,8 +96,12 @@ export default function MintForm() {
             <img className='buttonSvg' src='../add.svg'></img>
           </button>
       </div>
-      <button className='mint-button' disabled={!write || isLoading} onClick={() => write()}>
-        {isLoading ? 'Minting...' : getMintText(quantity)}
+      <button 
+        className='mint-button'
+        disabled={isLoading}
+        onClick={handleMintClick}
+      >
+        {isLoading ? 'Minting...' : (isConnected ? getMintText(quantity) : 'CONNECT')}
       </button>
       {isSuccess && (
         <div>
