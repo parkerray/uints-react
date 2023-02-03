@@ -5,20 +5,42 @@ import { useState, useEffect } from 'react';
 import { getTotalSupply } from '../alchemyAPI';
 
 function MintPage() {
-	const [supply,setSupply] = useState(0);
+	const [supply,setSupply] = useState(9999);
 
-	function getSupply() {
-		getTotalSupply().then(result => setSupply(result.totalSupply))
+	const calculateMinutes = () => {
+		let targetTime = new Date('2023-02-04T00:00:00Z');
+		let currentTime = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), new Date().getUTCHours(), new Date().getUTCMinutes(), new Date().getUTCSeconds()));
+
+		let remainingTime = (targetTime - currentTime) / 1000;
+		let result = Math.floor(remainingTime / 60);
+		return result;
 	}
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			getSupply();
-		}, 10000);
-		return () => clearInterval(interval);
-	}, []);
-
+	const [minutes,setMinutes] = useState(9999);
 	getSupply();
+
+	// useEffect(() => {
+	// 	const countdownInterval = setInterval(() => {
+	// 		setMinutes(calculateMinutes());
+	// 	}, 60000);
+	// 	return () => clearInterval(countdownInterval);
+	// }, []);
+
+	function getSupply() {
+		getTotalSupply().then(result => {
+			if (result.totalSupply != supply) {
+				setSupply(result.totalSupply)
+			}
+		}
+		)
+	}
+
+	// useEffect(() => {
+	// 	const interval = setInterval(() => {
+	// 		getSupply();
+	// 	}, 10000);
+	// 	return () => clearInterval(interval);
+	// }, []);
 
   return (
     <>
@@ -34,7 +56,7 @@ function MintPage() {
 								<p className='counter-label'>Minted</p>
 							</div>
 							<div className='counter-card'>
-								<Segments value={32} />
+								<Segments value={minutes} />
 								<p className='counter-label'>Minutes left</p>
 							</div>
 						</div>
