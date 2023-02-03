@@ -32,7 +32,7 @@ function FreeMintPage() {
     <>
 			<div className='section-split'>
 				<div className='left disable-scroll'>
-					<MintForm contractAddress={contractAddress} cost={'0'} />
+					<MintForm contractAddress={contractAddress} cost={0} />
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>

@@ -6,7 +6,7 @@ import {
   useContractRead,
 } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/react';
-import { ethers } from 'ethers';
+import { ethers, BigNumber } from 'ethers';
 
 import { useState, useEffect } from 'react';
 import './MintForm.css';
@@ -88,7 +88,7 @@ export default function MintForm({contractAddress,cost}) {
 		args: [quantity],
     overrides: {
       from: address,
-      value: ethers.utils.parseEther(cost) * quantity,
+      value: BigNumber.from((quantity * cost).toString()),
     },
 	})
 
@@ -145,7 +145,7 @@ export default function MintForm({contractAddress,cost}) {
     }
   }
 
-  if (isConnected)
+
    return (
     <div className='form-wrapper'>
       {(isFreeRoute || freeMints > 0) || (!isFreeRoute) && (

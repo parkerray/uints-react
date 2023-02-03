@@ -32,7 +32,7 @@ function MintPage() {
     <>
 			<div className='section-split'>
 				<div className='left disable-scroll'>
-					<MintForm contractAddress={contractAddress} cost={'0.002'} />
+					<MintForm contractAddress={contractAddress} cost={2000000000000000} />
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>

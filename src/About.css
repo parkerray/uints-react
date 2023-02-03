@@ -1,0 +1,41 @@
+.margin-top-bottom {
+  margin: 20px 0;
+}
+
+.def-title {
+  font-weight: 700;
+  margin: 0;
+}
+
+.def-subtitle {
+  font-style: italic;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+.definition {
+  padding-left: 18px;
+  border-left: #fff solid 2px;
+  margin: 60px 0 30px 0;
+}
+
+h2 {
+  margin-bottom: .8em;
+}
+
+li {
+  font-size: 1.1em;
+  line-height: 150%;
+}
+
+.toplist {
+  font-weight: 700;
+  margin: 30px 0;
+}
+
+.sublist {
+  font-weight: 400;
+  font-size: .9em;
+  margin-top: 10px;
+}
