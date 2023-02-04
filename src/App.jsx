@@ -29,7 +29,7 @@ function App() {
           <Segments value={count} />
           <h1 className='hero-text'>Numbers are art</h1>
           <h2 className='hero-text-sub'>& we are artists</h2>
-          <button className='button-outline' onClick={handleClick}>Paint a picture</button>
+          <button className='button-outline' onClick={handleClick}>Try it</button>
         </div>
       </div>
     </>
