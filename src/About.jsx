@@ -1,6 +1,7 @@
 import Segments from './Segments';
 import './About.css';
 import { useState, useEffect } from 'react';
+import {Helmet} from "react-helmet";
 
 function About() {
 
@@ -19,6 +20,10 @@ function About() {
 
   return (
     <>
+    <Helmet>
+      <title>UINTS - About</title>
+      <meta name='description' content='UINTS are nfts rendered on the blockchain as seven-segment display numbers. Numbers are art, and we are artists.'/>
+    </Helmet>
 			<div className='section-split'>
 				<div className='left align-top'>
           <div className='paragraph-wrapper'>
