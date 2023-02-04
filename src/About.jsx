@@ -1,7 +1,6 @@
 import Segments from './Segments';
 import './About.css';
 import { useState, useEffect } from 'react';
-import {Helmet} from "react-helmet";
 
 function About() {
 
@@ -20,25 +19,6 @@ function About() {
 
   return (
     <>
-    <Helmet>
-      
-      <title>UINTS - About</title>
-      <meta name="description" content="Stored and rendered fully on-chain. Numbers are art, and we are artists."/>
-
-      <meta property="og:url" content="https://staging.uints.com/about"/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:title" content="UINTS - About"/>
-      <meta property="og:description" content="Stored and rendered fully on-chain. Numbers are art, and we are artists."/>
-      <meta property="og:image" content="https://pub-42ce16a4b5714051a28aed793bcf67b0.r2.dev/og.png"/>
-
-      <meta name="twitter:card" content="summary_large_image"/>
-      <meta property="twitter:domain" content="staging.uints.com"/>
-      <meta property="twitter:url" content="https://staging.uints.com/about"/>
-      <meta name="twitter:title" content="UINTS - About"/>
-      <meta name="twitter:description" content="Stored and rendered fully on-chain. Numbers are art, and we are artists."/>
-      <meta name="twitter:image" content="https://pub-42ce16a4b5714051a28aed793bcf67b0.r2.dev/og.png"/>
-        
-    </Helmet>
 			<div className='section-split'>
 				<div className='left align-top'>
           <div className='paragraph-wrapper'>
