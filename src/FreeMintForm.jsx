@@ -3,20 +3,63 @@ import {
   useContractWrite,
   useWaitForTransaction,
   useAccount,
+  useContractRead,
 } from 'wagmi';
 import { useWeb3Modal } from '@web3modal/react';
-import { ethers, BigNumber } from 'ethers';
 
 import { useState } from 'react';
 import './MintForm.css';
 
-export default function MintForm({contractAddress,cost}) {
+export default function FreeMintForm({contractAddress,cost}) {
 
   //define states
   const [quantity, setQuantity] = useState(1);
+  const [limit, setLimit] = useState(50);
   const [showForm, setShowForm] = useState(true);
+  const [freeMints, setFreeMints] = useState(0);
 
   const { isConnected, address } = useAccount();
+
+  //check for free mints
+  {
+    const { data } = useContractRead({
+      address: contractAddress,
+      functionName: 'getRemaining',
+      abi: [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "addy",
+              "type": "address"
+            }
+          ],
+          "name": "getRemaining",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+      ],
+      args: [address],
+      onSuccess(data) {
+        const amt = parseInt(data._hex, 16);
+        if (amt > 0) {
+          setLimit(amt);
+          setFreeMints(amt);
+          console.log(`${address} has ${amt} free mints`)
+        } else {
+          setLimit(0);
+          console.log(`${address} has 0 free mints`)
+        }
+      },
+    })
+  }
 
 	const { config } = usePrepareContractWrite({
 	  address: contractAddress,
@@ -29,18 +72,14 @@ export default function MintForm({contractAddress,cost}) {
             "type": "uint256"
           }
         ],
-        "name": "mint",
+        "name": "freeMint",
         "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "nonpayable",
         "type": "function"
       },
     ],
-		functionName: 'mint',
+		functionName: 'freeMint',
 		args: [quantity],
-    overrides: {
-      from: address,
-      value: 0, //BigNumber.from((quantity * cost).toString()),
-    },
 	})
 
   const { data, write } = useContractWrite({
@@ -63,7 +102,7 @@ export default function MintForm({contractAddress,cost}) {
   }
 
   const increaseQuantity = () => {
-    if (quantity >= 0) {
+    if (quantity >= 0 && quantity < limit) {
       setQuantity(quantity + 1);
     }
   }
@@ -71,6 +110,14 @@ export default function MintForm({contractAddress,cost}) {
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+    }
+  }
+
+  const getMintText = (value) => {
+    if (value <= limit) {
+      return `Mint for free`;
+    } else {
+      return `limit is ${limit}`;
     }
   }
 
@@ -84,8 +131,11 @@ export default function MintForm({contractAddress,cost}) {
     }
   }
 
+
    return (
     <div className='form-wrapper'>
+      {freeMints > 0 ? (
+      <>
         {showForm && (
         <>
           <input 
@@ -108,12 +158,16 @@ export default function MintForm({contractAddress,cost}) {
           className='mint-button'
           disabled={isLoading || isError || isSuccess}
           onClick={handleMintClick}>
-          {isLoading ? 'Minting...' : isSuccess ? 'Success!' : (isConnected ? `Mint Ξ${(quantity * .002).toFixed(3)}` : 'CONNECT')}
+          {isLoading ? 'Minting...' : isSuccess ? 'Success!' : (isConnected ? getMintText(quantity) : 'CONNECT')}
         </button>
       {isSuccess && (
         <div className='successMessage'>
             <a href={`https://etherscan.io/tx/${data?.hash}`}>View tx on etherscan</a>
         </div>
+      )}
+      </>):null}
+      {freeMints == 0 && (
+        <a className='successMessage' href='/mint'>You have no free mints</a>
       )}
     </div>
    )

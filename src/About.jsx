@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 function About() {
 
-  const [value,setValue] = useState(0);
+  const [value,setValue] = useState(9999);
 
   function getRandomInt() {
     return Math.floor(Math.random() * 9999);
