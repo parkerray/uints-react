@@ -67,7 +67,7 @@ function About() {
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Combining:</h2>
-            <p>There is already a combine (burn) mechanism built into the contract. Soon after the minting closes, it will be activated. Combine tokens to get a higher value. The largest number possible is 9999.</p>
+            <p>There is already a combine (burn) mechanism built into the contract, ready to be activated sometime after minting is closed. Combine tokens to get a higher value. The largest number possible is 9999.</p>
             <p>When numbers are combined for the first time, the token kept will be assigned a new color randomly. This color will persist in future combinations, as long as that token is the root. More details to come when this functionality is activated.</p>
             </div>
             <div className='margin-top-bottom'>
