@@ -61,7 +61,7 @@ function About() {
                 Tokens 1-1000 (phase 1)
                 <ul className='sublist'>
                   <li>Time limit: 24 hours from token 1000 being minted</li>
-                  <li>Possible values: 1 or 10</li>
+                  <li>Possible numbers: 1, 10, or 100</li>
                   <li>Note: if 5000 tokens are not minted before the time limit, phase 3 will not start</li>
                 </ul>
               </li>
@@ -71,7 +71,7 @@ function About() {
                 Tokens 1001-5000 (phase 2)
                 <ul className='sublist'>
                   <li>Time limit: 24 hours from token 5000 being minted</li>
-                  <li>Value: 1</li>
+                  <li>Possible numbers: 1 or 10</li>
                 </ul>
               </li>
             </ul>
@@ -80,7 +80,7 @@ function About() {
                 Tokens 5001+ (phase 3)
                 <ul className='sublist'>
                   <li>Time limit: none</li>
-                  <li>Possible values: 1, 10, or 100</li>
+                  <li>Possible values: 1</li>
                 </ul>
               </li>
             </ul>
@@ -88,14 +88,11 @@ function About() {
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Combining:</h2>
             <p>There is already a combine (burn) mechanism built into the contract. Soon after the minting closes, it will be activated. Combine tokens to get a higher value. The largest number possible is 9999.</p>
+            <p>When numbers are combined for the first time, the token kept will be assigned a new color randomly. This color will persist in future combinations, as long as that token is the root. More details to come when this functionality is activated.</p>
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Utility:</h2>
-            <p>This is just art, these are just numbers.</p>
-            </div>
-            <div className='margin-top-bottom'>
-            <h2 className='subheading'>Request:</h2>
-            <p>Please participate responsibly. Ask yourself: “What if all I get are nfts?” This is not an investment, this is just art, these are just numbers.</p>
+            <p>This is just art, these are just numbers. Please participate responsibly. Ask yourself: “What if all I get are nfts?”</p>
             <p>-Parker</p>
             </div>
           </div>
