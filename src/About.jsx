@@ -40,8 +40,8 @@ function About() {
               <li className='toplist'>
                 Tokens 1-1000 (phase 1)
                 <ul className='sublist'>
-                  <li>Time limit: 24 hours from token 1000 being minted</li>
-                  <li>Possible numbers: 1, 10, or 100</li>
+                  <li>Time limit: none</li>
+                  <li>Possible numbers: 1-99</li>
                 </ul>
               </li>
             </ul>
@@ -49,8 +49,8 @@ function About() {
               <li className='toplist'>
                 Tokens 1001-5000 (phase 2)
                 <ul className='sublist'>
-                  <li>Time limit: 24 hours from token 5000 being minted</li>
-                  <li>Possible numbers: 1 or 10</li>
+                  <li>Time limit: 24 hours from token 1000 being minted</li>
+                  <li>Possible numbers: 1-49</li>
                   <li>Note: if 5000 tokens are not minted before the time limit, phase 3 will not start</li>
                 </ul>
               </li>
@@ -59,8 +59,8 @@ function About() {
               <li className='toplist'>
                 Tokens 5001+ (phase 3)
                 <ul className='sublist'>
-                  <li>Time limit: none</li>
-                  <li>Possible values: 1</li>
+                  <li>Time limit: 24 hours from token 1000 being minted</li>
+                  <li>Possible values: 1-9</li>
                 </ul>
               </li>
             </ul>
