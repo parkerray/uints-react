@@ -39,7 +39,7 @@ export default function MintForm({contractAddress,cost}) {
 		args: [quantity],
     overrides: {
       from: address,
-      value: 0, //BigNumber.from((quantity * cost).toString()),
+      value: BigNumber.from((quantity * cost).toString()),
     },
 	})
 

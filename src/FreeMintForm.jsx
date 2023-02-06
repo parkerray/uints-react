@@ -24,7 +24,7 @@ export default function FreeMintForm({contractAddress,cost}) {
   {
     const { data } = useContractRead({
       address: contractAddress,
-      functionName: 'getRemaining',
+      functionName: 'freeMintBalance',
       abi: [
         {
           "inputs": [
@@ -34,7 +34,7 @@ export default function FreeMintForm({contractAddress,cost}) {
               "type": "address"
             }
           ],
-          "name": "getRemaining",
+          "name": "freeMintBalance",
           "outputs": [
             {
               "internalType": "uint256",
