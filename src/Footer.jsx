@@ -8,16 +8,16 @@ function Footer() {
         <span>UINTS</span>
       </div>
       <div className='footer-right'>
-        <a href='/'>
+        <a href='https://etherscan.io/address/0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407#code'>
           <img className='icon' src='../etherscan.svg' alt='etherscan'></img>
         </a>
-        <a href='/'>
+        <a href='https://twitter.com/uintsnft'>
           <img className='icon' src='../twitter.svg' alt='twitter'></img>
         </a>
-        <a href='/'>
+        <a href='https://blur.io/collection/uints'>
           <img className='icon' src='../blur.png' alt='blur'></img>
         </a>
-        <a href='/'>
+        <a href='https://opensea.io/collection/uints'>
           <img className='icon' src='../os.svg' alt='opensea'></img>
         </a>
       </div>
