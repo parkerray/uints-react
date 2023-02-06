@@ -108,7 +108,7 @@ export default function MintForm({contractAddress,cost}) {
           className='mint-button'
           disabled={isLoading || isError || isSuccess}
           onClick={handleMintClick}>
-          {isLoading ? 'Minting...' : isSuccess ? 'Success!' : (isConnected ? `Mint Ξ${(quantity * .002).toFixed(3)}` : 'CONNECT')}
+          {isLoading ? 'Minting...' : isSuccess ? 'Success!' : (isConnected ? `Mint Ξ${(quantity * .003).toFixed(3)}` : 'CONNECT')}
         </button>
       {isSuccess && (
         <div className='successMessage'>
