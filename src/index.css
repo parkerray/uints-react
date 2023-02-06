@@ -227,6 +227,17 @@ p {
   text-transform: uppercase;
 }
 
+#error-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  max-width: 500px;
+  text-align: center;
+}
+
 @media (max-width: 991px) {
 
 .section-split {
