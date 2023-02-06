@@ -3,7 +3,7 @@ import Segments from './Segments';
 import { useState, useEffect } from 'react';
 import { useContractRead } from 'wagmi'
 
-import { getTotalSupply } from '../alchemyAPI';
+import { getTotalSupply } from '../web3api';
 
 function MintPage() {
 	const [supply,setSupply] = useState('');
