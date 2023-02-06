@@ -70,3 +70,12 @@
   text-align: center!important;
   text-decoration: underline;
 }
+
+.errorMessage {
+  text-transform: uppercase;
+  margin-top: 16px;
+  width: 100%;
+  display: block;
+  text-align: center!important;
+  color: #E85A51;
+}

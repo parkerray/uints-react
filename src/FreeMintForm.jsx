@@ -61,7 +61,7 @@ export default function FreeMintForm({contractAddress,cost}) {
     })
   }
 
-	const { config } = usePrepareContractWrite({
+	const { config, error: prepareError, isError: isPrepareError } = usePrepareContractWrite({
 	  address: contractAddress,
 		abi: [
       {
@@ -82,14 +82,14 @@ export default function FreeMintForm({contractAddress,cost}) {
 		args: [quantity],
 	})
 
-  const { data, write } = useContractWrite({
+  const { data, error, isError, write } = useContractWrite({
     ...config,
     onSuccess() {
       setShowForm(false);
     }
   });
 
-  const { isLoading, isSuccess, isError } = useWaitForTransaction({
+  const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
 
@@ -163,6 +163,11 @@ export default function FreeMintForm({contractAddress,cost}) {
       {isSuccess && (
         <div className='successMessage'>
             <a href={`https://etherscan.io/tx/${data?.hash}`}>View tx on etherscan</a>
+        </div>
+      )}
+      {isPrepareError || isError && (
+        <div className='errorMessage'>
+            <p>Error: {(prepareError || error)?.message}</p>
         </div>
       )}
       </>):null}
