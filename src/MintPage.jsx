@@ -3,8 +3,6 @@ import Segments from './Segments';
 import { useState, useEffect } from 'react';
 import { useContractRead } from 'wagmi'
 
-import { getTotalSupply } from '../web3api';
-
 function MintPage() {
 	const [supply,setSupply] = useState('');
 	const [minutes,setMinutes] = useState('');
@@ -31,17 +29,33 @@ function MintPage() {
 		}
   })
 
+	const { mintData } = useContractRead({
+		address: contractAddress,
+		abi: [{
+			"inputs": [],
+			"name": "mintCount",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},],
+		functionName: 'mintCount',
+		onSuccess(data) {
+			setSupply(parseInt(data._hex, 16));
+		}
+	})
+
 	useEffect(() => {
 		setInterval(() => {
 			setMinutes(parseInt(data._hex, 16));
+			setSupply(parseInt(mintData._hex, 16));
 		}, 10000);
   }, []);
-
-	useEffect(() => {
-    getTotalSupply(contractAddress).then(supply => {
-      setSupply(supply == undefined ? 0 : supply);
-    });
-  }, [contractAddress]);
 
   return (
     <>
