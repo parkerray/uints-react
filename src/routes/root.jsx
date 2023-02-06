@@ -3,13 +3,13 @@ import Footer from '../Footer'
 
 import { modalConnectors, walletConnectProvider } from '@web3modal/ethereum';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { goerli, mainnet } from 'wagmi/chains';
+import { mainnet } from 'wagmi/chains';
 
-const chains = [goerli,mainnet];
+const chains = [mainnet];
 
 // Wagmi client
 const { provider } = configureChains(chains, [
-  walletConnectProvider({ projectId: '34db74586f81b3b0d0eb40e145dc4e6a' }),
+  walletConnectProvider({ projectId: 'e3ec552512d772dd5ccbbf77a0e02524' }),
 ]);
 const wagmiClient = createClient({
   autoConnect: true,

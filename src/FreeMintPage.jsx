@@ -8,7 +8,7 @@ import { getTotalSupply } from '../web3api';
 function MintPage() {
 	const [supply,setSupply] = useState('');
 	const [minutes,setMinutes] = useState('');
-	const contractAddress = '0xdaD6Ff0Eee96436FA50028C9d88EF308E81DD11E';
+	const contractAddress = '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407';
 
 	const { data, isError, isLoading } = useContractRead({
     address: contractAddress,
