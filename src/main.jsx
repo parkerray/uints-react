@@ -4,6 +4,7 @@ import App from './App'
 import MintPage from './MintPage'
 import FreeMintPage from './FreeMintPage'
 import About from './About'
+import Combine from './Combine'
 import Root from './routes/root'
 import ErrorPage from './error-page'
 import './index.css'
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/free",
         element: <FreeMintPage />
+      },
+      {
+        path: "/combine",
+        element: <Combine />
       }
     ]
   }
