@@ -84,7 +84,8 @@ function Combine() {
 						<div className='counter-wrapper'>
 							<div className='counter-card'>
 								<Segments value={getSum(selected)} />
-								<p className='counter-label'>Total if combined</p>
+								<p className='counter-label'>Sum of selected tokens</p>
+                <p className='counter-label-sub'>Combining is inactive</p>
 							</div>
 						</div>
 					</div>
