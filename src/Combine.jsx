@@ -77,7 +77,7 @@ function Combine() {
             
           ))}
           </div>
-          </div>) : <p>NO UINTS FOUND</p>}
+          </div>) : <p className='margin-10p'>CONNECT TO A WALLET WITH UINTS TO SEE A PREVIEW OF THE COMBINE FUNCTION.</p>}
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>

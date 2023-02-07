@@ -282,6 +282,10 @@ p {
   font-size: .9em;
 }
 
+.margin-10p {
+  margin: 10%;
+}
+
 @media (max-width: 991px) {
 
 .section-split {
