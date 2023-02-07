@@ -30,10 +30,19 @@
 
 @media (max-width: 991px) {
 
+  .logo {
+    display: none;
+  }
+
+  .nav {
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
 
 }
