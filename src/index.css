@@ -252,10 +252,10 @@ p {
 
 .token-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   grid-auto-rows: minmax(100px, auto);
-  max-width: 500px;
+  max-width: 420px;
   margin-top: 18px;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -279,6 +279,7 @@ p {
 
 .token-card p {
   margin: 16px 0 0 0;
+  font-size: .9em;
 }
 
 @media (max-width: 991px) {
