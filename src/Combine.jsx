@@ -57,7 +57,7 @@ function Combine() {
   return (
     <>
 			<div className='section-split'>
-				<div className='left align-top'>
+				<div className={tokens.length > 0 ? 'left align-top' : 'left'}>
           {tokens.length > 0 ? (
             <div className='select-tokens-container'>
             {tokens.length != selected.length ? <p className='button-outline' onClick={selectAll}>SELECT ALL</p> :
