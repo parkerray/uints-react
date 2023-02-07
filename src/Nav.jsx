@@ -33,6 +33,7 @@ function Nav() {
         <div className='nav-links'>
           <Link to={`/about`}>About</Link>
           <Link to={`/mint`}>Mint</Link>
+          <Link to={`/combine`}>Combine</Link>
           <Web3Button icon='hide' label='CONNECT' />
         </div>
       </nav>
