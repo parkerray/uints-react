@@ -4,9 +4,9 @@ import { useAccount } from 'wagmi';
 import { getOwnedNfts } from '../web3api';
 
 function Combine() {
-  const [values, setValues] = useState([]);
   const [tokens, setTokens] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [tokensFetched, setTokensFetched] = useState(false);
 
   const { isConnected, address } = useAccount();
 
@@ -28,19 +28,40 @@ function Combine() {
     return sum;
   }
 
+  const selectAll = () => {
+    setSelected(() => {
+      let all = [];
+      for (let i = 0; i < tokens.length; i++) {
+        all.push(tokens[i]);
+      }
+      return all;
+    })
+  }
+
+  const deselectAll = () => {
+    setSelected([]);
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getOwnedNfts(address);
-      setTokens(result.ownedNfts);
+    if (!tokensFetched) {
+      console.log('fetching...')
+      const fetchData = async () => {
+        const result = await getOwnedNfts(address);
+        setTokens(result.ownedNfts);
+      }
+      fetchData();
+      setTokensFetched(true);
     }
-    fetchData();
   }, [isConnected, address]);
 
   return (
     <>
 			<div className='section-split'>
-				<div className='left'>
+				<div className='left align-top'>
           {tokens.length > 0 ? (
+            <div className='select-tokens-container'>
+            {tokens.length != selected.length ? <p className='button-outline' onClick={selectAll}>SELECT ALL</p> :
+            <p className='button-outline' onClick={deselectAll}>DESELECT ALL</p>}
           <div className='token-grid'>
           {tokens.map(token => (
             <div 
@@ -53,7 +74,9 @@ function Combine() {
               <Segments value={token.rawMetadata.attributes[0].value} />
               <p>{token.title}</p>
             </div>
+            
           ))}
+          </div>
           </div>) : <p>NO UINTS FOUND</p>}
 				</div>
 				<div className='right disable-scroll'>
