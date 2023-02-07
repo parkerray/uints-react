@@ -111,13 +111,16 @@ p {
   border-radius: 0;
   background-color: #0c0c0c;
   color: #fff;
-  font-size: 1.2em;
   text-transform: uppercase;
   padding: 12px 24px;
   margin: 24px;
   cursor: pointer;
   transition:cubic-bezier(1, 0, 0, 1);
   transition-duration: 200ms;
+  font-size: 1em;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .button-outline:hover {
@@ -331,10 +334,6 @@ p {
   position: static;
   overflow: visible;
   width: 90%;
-}
-
-.button-outline {
-  font-size: 1em;
 }
 
 }
