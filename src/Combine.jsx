@@ -1,12 +1,9 @@
 import Segments from './Segments';
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { useWeb3Modal } from '@web3modal/react';
 import { getOwnedNfts } from '../web3api';
 
 function Combine() {
-	const contractAddress = '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407';
-  const [sum, setSum] = useState(0);
   const [values, setValues] = useState([]);
   const [tokens, setTokens] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -21,13 +18,6 @@ function Combine() {
         return [...prevSelected, token];
       }
     });
-    setValues(prevValues => {
-      if (prevValues.includes(token.rawMetadata.attributes[0].value)) {
-        return prevValues.filter(i => i !== token.rawMetadata.attributes[0].value);
-      } else {
-        return [...prevValues, token.rawMetadata.attributes[0].value];
-      }
-    })
   };
 
   const getSum = (tokens) => {
@@ -44,7 +34,7 @@ function Combine() {
       setTokens(result.ownedNfts);
     }
     fetchData();
-  }, []);
+  }, [isConnected, address]);
 
   return (
     <>
