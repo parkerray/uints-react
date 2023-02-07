@@ -7,7 +7,7 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page">
-      <Segments value={404} />
+      <Segments value={error.status} />
       <h2>Error: {error.statusText || error.message}</h2>
       <a href="/" className="button-outline">Go Home</a>
     </div>
