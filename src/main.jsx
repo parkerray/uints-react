@@ -5,6 +5,7 @@ import MintPage from './MintPage'
 import FreeMintPage from './FreeMintPage'
 import About from './About'
 import Combine from './Combine'
+import Colors from './Colors'
 import Root from './routes/root'
 import ErrorPage from './error-page'
 import './index.css'
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/combine",
         element: <Combine />
+      },
+      {
+        path: "/colors",
+        element: <Colors />
       }
     ]
   }

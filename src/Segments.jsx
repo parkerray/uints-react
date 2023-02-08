@@ -1,9 +1,9 @@
 import { renderSvg } from '../numberGenerator.js'
 
-function Segments({value}) {
+function Segments({value,colors = [255,255,255]}) {
 
   if (value != undefined) {
-    const image = renderSvg(value);
+    const image = renderSvg(value,colors);
     const buff = new Buffer(image);
     const base64data = buff.toString('base64');
     const b64 = `data:image/svg+xml;base64,${base64data}`

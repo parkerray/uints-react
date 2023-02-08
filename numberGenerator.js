@@ -31,7 +31,7 @@ const renderStyles = (p, number) => {
   }
 }
 
-export function renderSvg(value) {
+export function renderSvg(value,colors) {
   if (value != undefined);
   let array = splitNumber(value.toString());
   let count = array.length;
@@ -57,7 +57,7 @@ export function renderSvg(value) {
       index++;
     }
   }
-  
-  svg = svg + `</style></svg>`
+
+  svg = svg + `#bg{fill:#0c0c0c}*{fill:rgb(${colors[0]},${colors[1]},${colors[2]})}</style></svg>`
   return svg;
 }
