@@ -73,7 +73,8 @@ function MintPage() {
 							</div> */}
 							{minutes != 0 && (<div className='counter-card'>
 								<Segments value={minutes} />
-								<p className='counter-label'>Minutes left / {supply} minted</p>
+								<p className='counter-label'>Minutes left</p>
+								<p className='counter-label'>{supply} minted</p>
 							</div>)}
 						</div>
 					</div>
