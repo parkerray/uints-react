@@ -295,6 +295,26 @@ p {
   margin: 10%;
 }
 
+.popup {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0c0c0cf2;
+  flex-direction: column;
+}
+
+.popup .button-outline:hover {
+  background-color: #0c0c0c;
+}
+
 @media (max-width: 991px) {
 
 .section-split {

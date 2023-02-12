@@ -1,8 +1,10 @@
 import './Footer.css'
+import { useState } from 'react';
 
 function Footer() {
 
   return (
+    <div>
     <footer className='footer-wrapper'>
       <div className='footer-left'>
         <span>UINTS</span>
@@ -22,6 +24,7 @@ function Footer() {
         </a>
       </div>
     </footer>
+    </div>
   )
 
 }
