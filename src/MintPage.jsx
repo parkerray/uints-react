@@ -60,8 +60,9 @@ function MintPage() {
   return (
     <>
 			<div className='section-split'>
-				<div className='left disable-scroll'>
+				<div className='left disable-scroll flex-column'>
 					<MintForm contractAddress={contractAddress} cost={3000000000000000} />
+					<a className='successMessage' href='/about'>Please read the about page in full before minting</a>
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>

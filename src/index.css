@@ -315,6 +315,12 @@ p {
   background-color: #0c0c0c;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 @media (max-width: 991px) {
 
 .section-split {
