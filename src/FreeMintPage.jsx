@@ -66,13 +66,13 @@ function MintPage() {
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>
 						<div className='counter-wrapper'>
-							<div className='counter-card'>
+							{/* <div className='counter-card'>
 								<Segments value={supply} />
 								<p className='counter-label'>Minted</p>
-							</div>
+							</div> */}
 							{minutes != 0 && (<div className='counter-card'>
 								<Segments value={minutes} />
-								<p className='counter-label'>Minutes left</p>
+								<p className='counter-label'>Minutes left / {supply} minted</p>
 							</div>)}
 						</div>
 					</div>
