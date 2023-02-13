@@ -68,7 +68,7 @@ function MintPage() {
 					{!mintOver ? <>
 					<MintForm contractAddress={contractAddress} cost={3000000000000000} />
 					<a className='successMessage' href='/about'>Please read the about page in full before minting</a>
-					</> : <h1>Mint has ended</h1>}
+					</> : <div className='flex-column'><h1>Mint has ended</h1><a href='https://opensea.io/collection/uints' style={{textAlign: 'center'}} className='button-outline'>Opensea</a></div>}
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>
