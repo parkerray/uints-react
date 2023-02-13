@@ -6,6 +6,7 @@ import { useContractRead } from 'wagmi'
 function MintPage() {
 	const [supply,setSupply] = useState('');
 	const [minutes,setMinutes] = useState('');
+	const [mintOver, setMintOver] = useState(false);
 	const contractAddress = '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407';
 
 	const { data } = useContractRead({
@@ -26,6 +27,9 @@ function MintPage() {
     functionName: 'getMinutesRemaining',
 		onSuccess(data) {
 			setMinutes(parseInt(data._hex, 16));
+			if (parseInt(data._hex, 16) < 1) {
+				setMintOver(true);
+			}
 		}
   })
 
@@ -61,16 +65,14 @@ function MintPage() {
     <>
 			<div className='section-split'>
 				<div className='left disable-scroll flex-column'>
+					{!mintOver ? <>
 					<MintForm contractAddress={contractAddress} cost={3000000000000000} />
 					<a className='successMessage' href='/about'>Please read the about page in full before minting</a>
+					</> : <h1>Mint has ended</h1>}
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>
 						<div className='counter-wrapper'>
-							{/* <div className='counter-card'>
-								<Segments value={supply} />
-								<p className='counter-label'>Minted</p>
-							</div> */}
 							{minutes != 0 && (<div className='counter-card'>
 								<Segments value={minutes} />
 								<p className='counter-label'>Minutes left</p>
