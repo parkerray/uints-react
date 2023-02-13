@@ -5,8 +5,9 @@ import { getOwnedNfts } from '../web3api';
 
 function Combine() {
   const [tokens, setTokens] = useState([]);
+  const [tokensPageKey, setTokensPageKey] = useState('');
+  const [totalTokens, setTotalTokens] = useState(0);
   const [selected, setSelected] = useState([]);
-  const [tokensFetched, setTokensFetched] = useState(false);
 
   const { isConnected, address } = useAccount();
 
@@ -42,16 +43,31 @@ function Combine() {
     setSelected([]);
   }
 
-  useEffect(() => {
-    if (!tokensFetched) {
-      console.log('fetching...')
-      const fetchData = async () => {
-        const result = await getOwnedNfts(address);
-        setTokens(result.ownedNfts);
-      }
-      fetchData();
-      setTokensFetched(true);
+  const fetchData = async () => {
+    const result = await getOwnedNfts(address,tokensPageKey);
+    if (tokens.length > 0) {
+      setTokens([...tokens, ...result.ownedNfts]);
+    } else {
+      setTokens(result.ownedNfts);
     }
+
+    if (result.pageKey != '') {
+      setTokensPageKey(result.pageKey);
+    } else {
+      setTokensPageKey('');
+    }
+
+    setTotalTokens(result.totalCount);
+  }
+
+  const loadMore = () => {
+    console.log('fetching more...')
+    fetchData();
+  }
+  
+
+  useEffect(() => {
+    fetchData();
   }, [isConnected, address]);
 
   return (
@@ -78,14 +94,15 @@ function Combine() {
           ))}
           </div>
           </div>) : <p className='margin-10p'>CONNECT TO A WALLET WITH UINTS TO SEE A PREVIEW OF THE COMBINE FUNCTION.</p>}
+          {totalTokens > tokens.length && <button onClick={loadMore} className='button-outline'>Load more</button>}
 				</div>
 				<div className='right disable-scroll'>
 					<div className='container disable-scroll'>
 						<div className='counter-wrapper'>
 							<div className='counter-card'>
-								<Segments value={getSum(selected)} />
+								<Segments value={(getSum(selected) > 9999) ? 9999 : getSum(selected)} />
 								<p className='counter-label'>Sum of selected tokens</p>
-                <p className='counter-label-sub'>Combining is inactive</p>
+                <p className='counter-label-sub'>Combining is not yet active</p>
 							</div>
 						</div>
 					</div>
