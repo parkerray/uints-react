@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/free",
-        element: <FreeMintPage />
+        element: <MintPage />
       },
       {
         path: "/combine",
