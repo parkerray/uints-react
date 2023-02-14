@@ -7,22 +7,22 @@ export default function Top() {
   const [isLoading, setIsLoading] = useState(true);
 
 
-  const fetchData = async () => {
-    await fetch('https://main.api314.com/api:public:v1/top-max-holders')
-      .then(response => response.json())
-      .then(data => setRecords(data));
-    setIsLoading(false);
-  }
+  // const fetchData = async () => {
+  //   await fetch('https://main.api314.com/api:public:v1/top-max-holders')
+  //     .then(response => response.json())
+  //     .then(data => setRecords(data));
+  //   setIsLoading(false);
+  // }
 
-  useEffect(() => {
-    fetchData();
-  }, [])
+  // useEffect(() => {
+  //   fetchData();
+  // }, [])
 
 
   return (
     <>
       <div className='section-full'>
-        {isLoading ? <p>Loading...</p> :
+        {/* {isLoading ? <p>Loading...</p> :
         <div className='list-wrapper'>
           <div className='list-header'>
             <p>UINTS SUM</p>
@@ -34,8 +34,9 @@ export default function Top() {
               address={record.owner}
               number={record.max_value}
             />
-          ))}
-        </div>}
+          ))} */}
+        {/* </div>} */}
+        <p>Temporarily unavailable</p>
       </div>
     </>
   )
