@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import MintPage from './MintPage'
-import FreeMintPage from './FreeMintPage'
+import Top from './Top'
 import About from './About'
 import Combine from './Combine'
 import Colors from './Colors'
@@ -40,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/colors",
         element: <Colors />
+      },
+      {
+        path: '/top',
+        element: <Top />
       }
     ]
   }
