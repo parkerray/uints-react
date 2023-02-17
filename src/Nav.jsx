@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 import { Web3Modal, Web3Button } from '@web3modal/react';
 import { EthereumClient, modalConnectors, walletConnectProvider } from '@web3modal/ethereum';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { mainnet } from 'wagmi/chains';
+import { mainnet, goerli } from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
 
-const chains = [mainnet];
+const chains = [mainnet, goerli];
 
 // Wagmi client
 const { provider } = configureChains(chains, [
   walletConnectProvider({ projectId: 'e3ec552512d772dd5ccbbf77a0e02524' }),
+  publicProvider()
 ]);
 
 const wagmiClient = createClient({
@@ -22,7 +24,7 @@ const wagmiClient = createClient({
 // Web3Modal Ethereum Client
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
-function Nav() {
+export default function Nav() {
 
   return (
     <>
@@ -47,5 +49,3 @@ function Nav() {
     </>
   )
 }
-
-export default Nav

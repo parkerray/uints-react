@@ -1,5 +1,4 @@
 import './Footer.css'
-import { useState } from 'react';
 
 function Footer() {
 
@@ -26,7 +25,6 @@ function Footer() {
     </footer>
     </div>
   )
-
 }
 
 export default Footer;

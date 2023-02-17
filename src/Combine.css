@@ -1,3 +1,7 @@
+* {
+  text-transform: uppercase;
+}
+
 .combine-page-outer {
   position: fixed;
   left: 0px;
@@ -31,6 +35,7 @@
 
 .combine-tray {
   position: absolute;
+  transform: translateY(130px);
   bottom: 0px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -47,6 +52,7 @@
   -ms-flex-align: center;
   align-items: center;
   border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+  background-color: #0c0c0c;
   text-transform: uppercase;
 }
 
@@ -64,6 +70,7 @@
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  padding-left: 2%;
 }
 
 .tray-right {
@@ -83,6 +90,7 @@
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
+  padding-right: 2%;
 }
 
 .button-outline {
@@ -102,8 +110,9 @@
 }
 
 .token-select-wrapper {
-  height: calc(100% - 130px);
+  height: 100%;
   overflow-y: scroll;
+  padding: 0 2%;
 }
 
 .token-select-header {
@@ -138,8 +147,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 18px;
-  padding-bottom: 80px;
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .token-card {
@@ -164,6 +172,83 @@
   width: 100%;
 }
 
-.token-image.selected {
-  border-color: #51ffa1;
+.load-more {
+  padding-bottom: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-page {
+  height: calc(100% - 111px);
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background-color: #0c0c0c;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-inner {
+  position: absolute;
+  background-color: #0c0c0c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.revealed-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.revealed-wrapper .counter {
+  max-width: 400px;
+}
+
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.spinner {
+  max-width: 80px;
+}
+
+.tagline {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.4em;
+  margin-top: 48px;
+}
+
+@media (max-width: 991px) {
+
+  .tokens-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .token-label {
+    font-size: .9em;
+  }
+
+}
+
+@media (max-width: 790px) {
+
+
+.mobile-hide {
+  display:none;
+}
+
 }

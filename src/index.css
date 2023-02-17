@@ -321,6 +321,10 @@ p {
   margin: 0;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 @media (max-width: 991px) {
 
 .section-split {
