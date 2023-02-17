@@ -1,4 +1,4 @@
-const apiKey = process.env.MORALIS_KEY; //NR8pHX3Ow5Iz2ZpqmgDeA1gOAovC85Cbvy5bZAatt5Nhj5oqrK21Ry3uNGUavCqF
+const apiKey = process.env.MORALIS_KEY;
 
 export async function getOwnedNfts(address,pageKey) {
   let url = '';
