@@ -1,5 +1,6 @@
 import Segments from './Segments';
 import TokenCard from './TokenCard';
+import CombineClock from './CombineClock';
 import './Combine.css';
 import { useState, useEffect } from 'react';
 import { getOwnedNfts, refresh, getNftMetadata } from '../moralis';
@@ -14,6 +15,7 @@ export default function CombineV2() {
   const [selected, setSelected] = useState([]);
   const [revealToken, setRevealToken] = useState(false);
   const [newToken, setNewToken] = useState();
+  const [combineActive, setCombineActive] = useState(false);
 
   const { isConnected, address } = useAccount();
 
@@ -115,7 +117,9 @@ export default function CombineV2() {
 
   return (
     <>
-			<div className="combine-page-outer">
+    {combineActive ? (
+      <>
+        <div className="combine-page-outer">
         <div className="combine-page-inner">
           <div className="token-select-wrapper">
             <div className="token-select-header">
@@ -204,6 +208,8 @@ export default function CombineV2() {
           </div>
         </div>
       </>)}
+      </>
+    ) : <CombineClock />}
     </>
   );
 }

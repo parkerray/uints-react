@@ -231,6 +231,23 @@
   margin-top: 48px;
 }
 
+.clock-wrapper {
+  position: fixed;
+  top: 61px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.clock-inner {
+  max-width: 600px;
+  margin: auto;
+  padding: 10%;
+}
+
 @media (max-width: 991px) {
 
   .tokens-grid {
