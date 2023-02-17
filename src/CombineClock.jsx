@@ -2,8 +2,17 @@ import Segments from "./Segments";
 import { useState, useEffect } from "react";
 
 export function getMinutes() {
-  const targetDate = new Date(2023, 1, 17, 21, 0, 0, 0);
-  const now = new Date();
+
+  const targetDate = new Date(Date.UTC(2023, 1, 18, 3, 0, 0, 0));
+  const now = new Date(Date.UTC(
+    new Date().getUTCFullYear(),
+    new Date().getUTCMonth(),
+    new Date().getUTCDate(),
+    new Date().getUTCHours(),
+    new Date().getUTCMinutes(),
+    new Date().getUTCSeconds(),
+    new Date().getUTCMilliseconds()
+  ));
   const difference = targetDate.getTime() - now.getTime();
   const minutes = Math.floor(difference / (1000 * 60));
   return minutes >= 0 ? minutes : 0;
