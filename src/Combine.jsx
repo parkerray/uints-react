@@ -33,14 +33,14 @@ export default function Combine() {
     }
   }, [combineActive])
 
-  const { config, error: prepareError, isError: isPrepareError } = usePrepareContractWrite({
+  const { config } = usePrepareContractWrite({
     address: '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407',
     abi: [{"inputs":[{"internalType":"uint256[]","name":"tokens","type":"uint256[]"}],"name":"combine","outputs":[],"stateMutability":"nonpayable","type":"function"}],
     functionName: 'combine',
     args: [selected.map(token => parseInt(token.token_id))]
   })
 
-  const { data, error, isError, write } = useContractWrite(config);
+  const { data, write } = useContractWrite(config);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
@@ -201,7 +201,7 @@ export default function Combine() {
           </motion.div>)}
         </AnimatePresence>
       </div>
-      {(isLoading || isSuccess) && (<>
+      {(isLoading || isSuccess || isError) && (<>
         <div className="modal-page">
           <div className="modal-inner">
             {isLoading && (
