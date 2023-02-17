@@ -1,5 +1,3 @@
-const apiKey = process.env.MORALIS_KEY;
-
 export async function getOwnedNfts(address,pageKey) {
   let url = '';
   if (pageKey == '') {
@@ -12,7 +10,7 @@ export async function getOwnedNfts(address,pageKey) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': apiKey
+      'X-API-Key': process.env.MORALIS_KEY
     }
   })
     .then(response => response.json())
@@ -30,7 +28,7 @@ export async function refresh(tokenId) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': apiKey
+      'X-API-Key': process.env.MORALIS_KEY
     }
   })
   .then(response => response.json())
@@ -49,7 +47,7 @@ export async function getNftMetadata(tokenId) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': apiKey
+      'X-API-Key': process.env.MORALIS_KEY
     }
   })
   .then(response => response.json())
