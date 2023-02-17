@@ -26,7 +26,7 @@ export default function CombineV2() {
   ]
 
   const { config, error: prepareError, isError: isPrepareError } = usePrepareContractWrite({
-    address: '0x6C6136B72EEBfd612519e8F1e60645FE5dB873Ec',
+    address: '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407',
     abi: [{"inputs":[{"internalType":"uint256[]","name":"tokens","type":"uint256[]"}],"name":"combine","outputs":[],"stateMutability":"nonpayable","type":"function"}],
     functionName: 'combine',
     args: [selected.map(token => parseInt(token.token_id))],
