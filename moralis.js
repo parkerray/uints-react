@@ -1,3 +1,5 @@
+const api = 'NR8pHX3Ow5Iz2ZpqmgDeA1gOAovC85Cbvy5bZAatt5Nhj5oqrK21Ry3uNGUavCqF'
+
 export async function getOwnedNfts(address,pageKey) {
   let url = '';
   if (pageKey == '') {
@@ -12,7 +14,7 @@ export async function getOwnedNfts(address,pageKey) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': process.env.VITE_MORALIS_KEY
+      'X-API-Key': api
     }
   })
     .then(response => response.json())
@@ -30,7 +32,7 @@ export async function refresh(tokenId) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': process.env.VITE_MORALIS_KEY
+      'X-API-Key': api
     }
   })
   .then(response => response.json())
@@ -49,7 +51,7 @@ export async function getNftMetadata(tokenId) {
     method: 'GET',
     headers: {
       'accept': 'application/json',
-      'X-API-Key': process.env.VITE_MORALIS_KEY
+      'X-API-Key': api
     }
   })
   .then(response => response.json())
