@@ -47,8 +47,8 @@ function AboutCombining() {
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Persistence:</h2>
-            <p>You will choose which token to keep, and that token's 'ID' and 'Mint Phase' will not change.</p>
-            <p>You will also choose which tokens to burn. Burned tokens will never be retrievable.</p>
+            <p>To combine UINTS, you will choose which token to keep. That token's 'ID' and 'Mint Phase' will not change.</p>
+            <p>The UINTS you choose to burn will never be retrievable.</p>
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Numbers:</h2>
