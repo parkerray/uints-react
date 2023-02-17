@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export function getMinutes() {
 
-  const targetDate = new Date(Date.UTC(2023, 1, 18, 3, 0, 0, 0));
+  const targetDate = new Date(Date.UTC(2023, 1, 18, 2, 0, 0, 0));
   const now = new Date(Date.UTC(
     new Date().getUTCFullYear(),
     new Date().getUTCMonth(),
