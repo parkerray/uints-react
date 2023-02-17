@@ -45,6 +45,7 @@ function About() {
             <p>There is already a combine (burn) mechanism built into the contract, ready to be activated sometime after minting is closed. Combine tokens to get a higher value. The largest number possible is 9999.</p>
             <p>Combining numbers will have an affect on the art, as new numbers will be assigned a random color. More details to come when this functionality is activated.</p>
             </div>
+            <a className='button-outline no-margin' href='/about/combining'>More details about combining</a>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Utility:</h2>
             <p>This is just art, these are just numbers. Ask yourself: “What if all I get are nfts?” and participate accordingly.</p>

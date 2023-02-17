@@ -10,6 +10,7 @@ import Root from './routes/root'
 import ErrorPage from './error-page'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AboutCombining from './AboutCombining'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/about/combining",
+        element: <AboutCombining />
       },
       {
         path: "/free",

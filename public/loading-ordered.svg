@@ -1,0 +1,93 @@
+<svg width="335" height="335" viewBox="0 0 335 335" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id='top' d="M266.462 -1.29117e-06L296 29.5L266.462 59L69.5385 59L40 29.5L69.5385 -9.89894e-06L266.462 -1.29117e-06Z" fill="white" fill-opacity="0.05"/>
+<path id='right' d="M276 68.6538L305.5 39L335 68.6538V266.346L305.5 296L276 266.346V68.6538Z" fill="white" fill-opacity="0.05"/>
+<path id='bottom' d="M266.462 276L296 305.5L266.462 335L69.5385 335L40 305.5L69.5385 276L266.462 276Z" fill="white" fill-opacity="0.05"/>
+<path id='left' d="M0 68.6538L29.5 39L59 68.6538V266.346L29.5 296L0 266.346V68.6538Z" fill="white" fill-opacity="0.05"/>
+
+<style>
+  #top {
+    animation: fade-in-top 3s linear infinite;
+  }
+  #right {
+    animation: fade-in-right 3s linear infinite;
+  }
+  #bottom {
+    animation: fade-in-bottom 3s linear infinite;
+  }
+  #left {
+    animation: fade-in-left 3s linear infinite;
+  }
+  
+  @keyframes fade-in-top {
+    0% {
+      fill-opacity: 0.05;
+    }
+    25% {
+      fill-opacity: 1;
+    }
+    50% {
+      fill-opacity: 0.05;
+    }
+    75% {
+      fill-opacity: 0.05;
+    }
+    100% {
+      fill-opacity: 0.05;
+    }
+  }
+  
+  @keyframes fade-in-right {
+    0% {
+      fill-opacity: 0.05;
+    }
+    25% {
+      fill-opacity: 0.05;
+    }
+    50% {
+      fill-opacity: 1;
+    }
+    75% {
+      fill-opacity: 0.05;
+    }
+    100% {
+      fill-opacity: 0.05;
+    }
+  }
+  
+  @keyframes fade-in-bottom {
+    0% {
+      fill-opacity: 0.05;
+    }
+    25% {
+      fill-opacity: 0.05;
+    }
+    50% {
+      fill-opacity: 0.05;
+    }
+    75% {
+      fill-opacity: 1;
+    }
+    100% {
+      fill-opacity: 0.05;
+    }
+  }
+  
+  @keyframes fade-in-left {
+    0% {
+      fill-opacity: 1;
+    }
+    25% {
+      fill-opacity: 0.05;
+    }
+    50% {
+      fill-opacity: 0.05;
+    }
+    75% {
+      fill-opacity: 0.05;
+    }
+    100% {
+      fill-opacity: 1;
+    }
+  }
+</style>
+</svg>

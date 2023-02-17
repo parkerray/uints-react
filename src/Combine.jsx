@@ -1,115 +1,236 @@
 import Segments from './Segments';
+import TokenCard from './TokenCard';
+import { CombineClock, getMinutes} from './CombineClock';
+import './Combine.css';
 import { useState, useEffect } from 'react';
-import { useAccount } from 'wagmi';
-import { getOwnedNfts } from '../web3api';
+import { getOwnedNfts, refresh, getNftMetadata } from '../moralis';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount } from 'wagmi';
 
-function Combine() {
+
+export default function Combine() {
   const [tokens, setTokens] = useState([]);
   const [tokensPageKey, setTokensPageKey] = useState('');
   const [totalTokens, setTotalTokens] = useState(0);
   const [selected, setSelected] = useState([]);
+  const [revealToken, setRevealToken] = useState(false);
+  const [newToken, setNewToken] = useState();
+  const [combineActive, setCombineActive] = useState();
+  const [syncError, setSyncError] = useState(false);
 
   const { isConnected, address } = useAccount();
 
-  const handleSelect = (token) => {
-    setSelected(prevSelected => {
-      if (prevSelected.includes(token)) {
-        return prevSelected.filter(i => i !== token);
-      } else {
-        return [...prevSelected, token];
+  const taglines = [
+    'Can I get your number?',
+    'That was calculated',
+    'Way to make it count',
+    'You summed some sums'
+  ]
+
+  useEffect(() => {
+    if (getMinutes() < 1) {
+      setCombineActive(true);
+    }
+  }, [combineActive])
+
+  const { config } = usePrepareContractWrite({
+    address: '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407',
+    abi: [{"inputs":[{"internalType":"uint256[]","name":"tokens","type":"uint256[]"}],"name":"combine","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+    functionName: 'combine',
+    args: [selected.map(token => parseInt(token.token_id))]
+  })
+
+  const { data, write } = useContractWrite(config);
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+    onSuccess(data) {
+      const attemptRefresh = async () => {
+        const result = await refresh(selected[0].token_id);
+        if (result.status != 'completed') {
+          setSyncError(true);
+        }
       }
-    });
+      attemptRefresh();
+    }
+  })
+
+  const handleSelect = (token) => {
+    if (getSum(selected) + token.normalized_metadata.attributes[0].value <= 9999) {
+      setSelected(prevSelected => {
+        if (prevSelected.includes(token)) {
+          return prevSelected.filter(i => i !== token);
+        } else {
+          return [...prevSelected, token];
+        }
+      });
+    } else {
+      console.log(`Cannot combine to a number greater than 9999.`)
+    }
   };
+
+  const handleReveal = async () => {
+    const tempToken = await getNftMetadata(selected[0].token_id);
+    setNewToken({
+      "color": tempToken.normalized_metadata.attributes[4].value,
+      "number": tempToken.normalized_metadata.attributes[0].value
+    });
+  }
+
+  useEffect(() => {
+    if (newToken) {
+      setRevealToken(true);
+    }
+  }, [newToken]);
+
+  const getTokenColors = (rgbString) => {
+    const valueString = rgbString.substring(4, rgbString.length - 1);
+    const valueArray = valueString.split(",");
+    return valueArray.map(value => parseInt(value, 10));
+  }
+
+  const closeModal = () => {
+    window.location.reload();
+  }
 
   const getSum = (tokens) => {
     let sum = 0;
     for (let i = 0; i < tokens.length; i++) {
-      sum += tokens[i].rawMetadata.attributes[0].value;
+      sum += tokens[i].normalized_metadata.attributes[0].value;
     }
     return sum;
   }
 
-  const selectAll = () => {
-    setSelected(() => {
-      let all = [];
-      for (let i = 0; i < tokens.length; i++) {
-        all.push(tokens[i]);
-      }
-      return all;
-    })
-  }
-
-  const deselectAll = () => {
-    setSelected([]);
-  }
-
   const fetchData = async () => {
+    if (!combineActive) {
+      return;
+    }
     const result = await getOwnedNfts(address,tokensPageKey);
-    if (tokens.length > 0) {
-      setTokens([...tokens, ...result.ownedNfts]);
-    } else {
-      setTokens(result.ownedNfts);
-    }
+    setTotalTokens(result.total);
+    if (result.total > tokens.length) {
+      if (tokens.length > 0) {
+        setTokens([...tokens, ...result.result]);
+      } else {
+        setTokens(result.result);
+      }
 
-    if (result.pageKey != '') {
-      setTokensPageKey(result.pageKey);
-    } else {
-      setTokensPageKey('');
+      if (result.cursor != '') {
+        setTokensPageKey(result.cursor);
+      } else {
+        setTokensPageKey('');
+      }
     }
-
-    setTotalTokens(result.totalCount);
   }
 
   const loadMore = () => {
-    console.log('fetching more...')
     fetchData();
   }
-  
 
   useEffect(() => {
     fetchData();
-  }, [isConnected, address]);
+  }, [isConnected, address, combineActive]);
 
   return (
     <>
-			<div className='section-split'>
-				<div className={tokens.length > 0 ? 'left align-top' : 'left'}>
-          {tokens.length > 0 ? (
-            <div className='select-tokens-container'>
-            {tokens.length != selected.length ? <p className='button-outline' onClick={selectAll}>SELECT ALL</p> :
-            <p className='button-outline' onClick={deselectAll}>DESELECT ALL</p>}
-          <div className='token-grid'>
-          {tokens.map(token => (
-            <div 
-              className='token-card'
-              key={token.tokenId}
-              style={{ border: selected.includes(token) ? '1px solid #0F2FD8' : '1px solid white' }}
-              onClick={() => handleSelect(token)}
-            >
-              {/* <img style={{width: '200px'}} src={token.media[0].raw}></img> */}
-              <Segments value={token.rawMetadata.attributes[0].value} />
-              <p>{token.title}</p>
+    {combineActive ? (
+      <>
+        <div className="combine-page-outer">
+        <div className="combine-page-inner">
+          <div className="token-select-wrapper">
+            <div className="token-select-header">
+              <div className='header-left'>
+                <h1>Combine Uints</h1>
+                <div>{selected.length < 1 ? `Choose a token to keep` : `Keeping ${selected[0].normalized_metadata.name}, now choose tokens to combine (burn)`}</div>
+              </div>
+              <div className='header-right mobile-hide'>
+                <Segments value={getSum(selected)} colors={selected.length > 0 ? getTokenColors(selected[0].normalized_metadata.attributes[4].value) : [255,255,255]} />
+              </div>
             </div>
-            
-          ))}
+            {tokens.length > 0 && (<div className="tokens-grid">
+              {tokens.map(token => (
+              <div
+                key={token.token_id}
+                onClick={() => handleSelect(token)}
+              >
+                <TokenCard
+                  image={token.normalized_metadata.image}
+                  label={token.normalized_metadata.name}
+                  color={
+                    selected[0] == token ? '#19D46F' :
+                    selected.includes(token) ? '#FF4B4B' : '#FFFFFF80'
+                  }
+                />
+              </div>))}
+            </div>)}
+            {(tokens.length == 0 && isConnected) || (!isConnected) && (<p>Connect a wallet with UINTS to combine</p>)}
+            <div className='load-more'>
+              {(totalTokens > tokens.length && tokens.length != 0) && (<button onClick={loadMore} className='button-outline'>Load more</button>)}
+            </div>
           </div>
-          </div>) : <p className='margin-10p'>CONNECT TO A WALLET WITH UINTS TO SEE A PREVIEW OF THE COMBINE FUNCTION.</p>}
-          {totalTokens > tokens.length && <button onClick={loadMore} className='button-outline'>Load more</button>}
-				</div>
-				<div className='right disable-scroll'>
-					<div className='container disable-scroll'>
-						<div className='counter-wrapper'>
-							<div className='counter-card'>
-								<Segments value={(getSum(selected) > 9999) ? 9999 : getSum(selected)} />
-								<p className='counter-label'>Sum of selected tokens</p>
-                <p className='counter-label-sub'>Combining is not yet active</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+        </div>
+        <AnimatePresence>
+          {selected.length > 1 && (<motion.div
+            className='combine-tray'
+            initial={{ transform: 'translateY(130px)' }}
+            animate={{ transform: 'translateY(0px)' }}
+            exit={{ transform: 'translateY(130px)' }}
+            transition={{ duration: .25 }}
+          >
+            <div className="combine-tray-inner">
+              <div className="tray-left">
+                <div className="tray-label">Keep: {selected[0].normalized_metadata.name}</div>
+                <div className="tray-label">Burn: {selected.length > 2 ? `${selected.length - 1} OTHER TOKENS` : `${selected.length - 1} OTHER TOKEN`}</div>
+                <div className="tray-label">New Value: {getSum(selected)}</div>
+                {selected[0].normalized_metadata.attributes[3].value == "White" && (
+                  <div className='tray-label'>Color: Random</div>
+                )}
+                {selected[0].normalized_metadata.attributes[3].value != "White" && (
+                  <div
+                    className='tray-label color'
+                    style={{color: selected[0].normalized_metadata.attributes[4].value}}
+                  >Color: {selected[0].normalized_metadata.attributes[4].value}</div>
+                )}
+              </div>
+              <div className="tray-right">
+                <button
+                  className="button-outline no-margin"
+                  onClick={() => write?.()}
+                >Combine</button>
+              </div>
+            </div>
+          </motion.div>)}
+        </AnimatePresence>
+      </div>
+      {(isLoading || isSuccess || isError) && (<>
+        <div className="modal-page">
+          <div className="modal-inner">
+            {isLoading && (
+              <div className='loading-wrapper'>
+                <img className='spinner' src='/public/loading-ordered.svg' />
+                <div>Combining your UINTS...</div>
+              </div>
+            )}
+            {(isSuccess && !revealToken) && (
+              <>
+                <h1>Successfully combined</h1>
+                {syncError ?
+                <div className='sync-error'>
+                <p>{`If the metadata isn't immediately updated on the site, please come back later.`}</p>
+                <p>{`IMPORTANT: The metadata has been updated on the blockchain, so the result of combining ${selected[0].normalized_metadata.name} again before the site is synced may be different from what is indicated on the site.`}</p>
+                <button className='button-outline' onClick={closeModal}>Back to combine page</button>
+                </div> :
+                <button className='button-outline' onClick={() => handleReveal()}>View {selected[0].normalized_metadata.name}</button>}
+              </>)}
+            {revealToken && (<div className='revealed-wrapper'>
+              <Segments value={newToken.number} colors={getTokenColors(newToken.color)} />
+              <div className='tagline'>{taglines[Math.floor(Math.random() * taglines.length)]}</div>
+              <button className='button-outline' onClick={closeModal}>Back to combine page</button>
+            </div>)}
+          </div>
+        </div>
+      </>)}
+      </>
+    ) : <CombineClock />}
     </>
   );
 }
-
-export default Combine;
