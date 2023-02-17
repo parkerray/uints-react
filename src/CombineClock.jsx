@@ -39,6 +39,7 @@ export function CombineClock() {
     <div className='clock-wrapper'>
       <div className='clock-inner'>
         <Segments value={minutesRemaining} colors={colors} />
+        <a className='button-outline' href='/about/combining'>About combining</a>
       </div>
     </div>
   )

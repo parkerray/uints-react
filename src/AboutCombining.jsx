@@ -53,7 +53,7 @@ function AboutCombining() {
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Numbers:</h2>
             <p>When you combine UINTS, the sum of all their number values will be added to the token you choose to keep.</p>
-            <p>The highest possible number is 9999, and it can only be achieved with perfect math. If the sum of token values are higher than 9999, they cannot be combined.</p>
+            <p>The highest possible number is 9999, and it can only be attained with perfect math. If the sum of token values are higher than 9999, they cannot be combined.</p>
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Colors:</h2>
@@ -69,7 +69,7 @@ function AboutCombining() {
             <p>If your metadata isn't updated right away, please wait a few minutes and come back later before combining again. Effort has been made to keep trying to update the metadata in the background.</p>
             <p>IMPORTANT: The outcome of combining tokens will be determined by the on-chain data, not the website. If your tokens on the site are not yet updated, the site will not be able to accurately predict the outcome of combining them.</p>
             <p>If tokens are out of sync, only combine them if you understand the risks involved. (Not recommended)</p>
-            <p>If you're unsure, it's recommended that you wait until the metadata is updated on the website before combining again.</p>
+            <p>In case you're unsure, it's recommended that you wait until the metadata is updated on the website before combining again.</p>
             </div>
             <div className='margin-top-bottom'>
             <h2 className='subheading'>Finally:</h2>
