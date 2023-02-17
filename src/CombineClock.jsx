@@ -1,10 +1,16 @@
 import Segments from "./Segments";
 import { useState, useEffect } from "react";
 
-export default function CombineClock(props) {
-  const {hideClock} = props;
+export function getMinutes() {
+  const targetDate = new Date(2023, 1, 17, 19, 0, 0, 0);
+  const now = new Date();
+  const difference = targetDate.getTime() - now.getTime();
+  const minutes = Math.floor(difference / (1000 * 60));
+  return minutes >= 0 ? minutes : 0;
+}
 
-  const [minutesRemaining, setMinutesRemaining] = useState(calculateMinutesRemaining());
+export function CombineClock() {
+  const [minutesRemaining, setMinutesRemaining] = useState(getMinutes());
 
   const getRandomColors = () => {
     const base = Math.floor(Math.random() * 3);
@@ -19,22 +25,11 @@ export default function CombineClock(props) {
   }
 
   const [colors, setColors] = useState(getRandomColors());
-  
-  function calculateMinutesRemaining() {
-    const targetDate = new Date(2023, 1, 17, 19, 0, 0, 0); // February 18, 2023 00:00:00 UTC
-    const now = new Date();
-    const difference = targetDate.getTime() - now.getTime();
-    const minutes = Math.floor(difference / (1000 * 60));
-    if (minutes < 1) {
-      hideClock();
-    }
-    return minutes >= 0 ? minutes : 0;
-  }
 
   useEffect(() => {
     const interval = setInterval(() => {
       setColors(getRandomColors());
-      setMinutesRemaining(calculateMinutesRemaining());
+      setMinutesRemaining(getMinutes());
     }, 60000);
 
     return () => clearInterval(interval);

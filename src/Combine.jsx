@@ -1,6 +1,6 @@
 import Segments from './Segments';
 import TokenCard from './TokenCard';
-import CombineClock from './CombineClock';
+import { CombineClock, getMinutes} from './CombineClock';
 import './Combine.css';
 import { useState, useEffect } from 'react';
 import { getOwnedNfts, refresh, getNftMetadata } from '../moralis';
@@ -8,14 +8,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount } from 'wagmi';
 
 
-export default function CombineV2() {
+export default function Combine() {
   const [tokens, setTokens] = useState([]);
   const [tokensPageKey, setTokensPageKey] = useState('');
   const [totalTokens, setTotalTokens] = useState(0);
   const [selected, setSelected] = useState([]);
   const [revealToken, setRevealToken] = useState(false);
   const [newToken, setNewToken] = useState();
-  const [combineActive, setCombineActive] = useState(false);
+  const [combineActive, setCombineActive] = useState();
+  const [syncError, setSyncError] = useState(false);
 
   const { isConnected, address } = useAccount();
 
@@ -23,15 +24,20 @@ export default function CombineV2() {
     'Can I get your number?',
     'That was calculated',
     'Way to make it count',
-    'You summed some sums',
-    'Want some ice for that burn?'
+    'You summed some sums'
   ]
+
+  useEffect(() => {
+    if (getMinutes() < 1) {
+      setCombineActive(true);
+    }
+  }, [combineActive])
 
   const { config, error: prepareError, isError: isPrepareError } = usePrepareContractWrite({
     address: '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407',
     abi: [{"inputs":[{"internalType":"uint256[]","name":"tokens","type":"uint256[]"}],"name":"combine","outputs":[],"stateMutability":"nonpayable","type":"function"}],
     functionName: 'combine',
-    args: [selected.map(token => parseInt(token.token_id))],
+    args: [selected.map(token => parseInt(token.token_id))]
   })
 
   const { data, error, isError, write } = useContractWrite(config);
@@ -39,13 +45,15 @@ export default function CombineV2() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
-      refresh(selected[0].token_id);
+      const attemptRefresh = async () => {
+        const result = await refresh(selected[0].token_id);
+        if (result.status != 'completed') {
+          setSyncError(true);
+        }
+      }
+      attemptRefresh();
     }
   })
-
-  const hideClock = () => {
-    setCombineActive(true);
-  }
 
   const handleSelect = (token) => {
     if (getSum(selected) + token.normalized_metadata.attributes[0].value <= 9999) {
@@ -94,6 +102,9 @@ export default function CombineV2() {
   }
 
   const fetchData = async () => {
+    if (!combineActive) {
+      return;
+    }
     const result = await getOwnedNfts(address,tokensPageKey);
     setTotalTokens(result.total);
     if (result.total > tokens.length) {
@@ -117,7 +128,7 @@ export default function CombineV2() {
 
   useEffect(() => {
     fetchData();
-  }, [isConnected, address]);
+  }, [isConnected, address, combineActive]);
 
   return (
     <>
@@ -201,8 +212,14 @@ export default function CombineV2() {
             )}
             {(isSuccess && !revealToken) && (
               <>
-                <h2>Uints combined!</h2>
-                <button className='button-outline' onClick={() => handleReveal()}>View {selected[0].normalized_metadata.name}</button>
+                <h1>Successfully combined</h1>
+                {syncError ?
+                <div className='sync-error'>
+                <p>{`If the metadata isn't immediately updated on the site, please come back later.`}</p>
+                <p>{`IMPORTANT: The metadata has been updated on the blockchain, so the result of combining ${selected[0].normalized_metadata.name} again before the site is synced may be different from what is indicated on the site.`}</p>
+                <button className='button-outline' onClick={closeModal}>Back to combine page</button>
+                </div> :
+                <button className='button-outline' onClick={() => handleReveal()}>View {selected[0].normalized_metadata.name}</button>}
               </>)}
             {revealToken && (<div className='revealed-wrapper'>
               <Segments value={newToken.number} colors={getTokenColors(newToken.color)} />
@@ -213,7 +230,7 @@ export default function CombineV2() {
         </div>
       </>)}
       </>
-    ) : <CombineClock hideClock={hideClock} />}
+    ) : <CombineClock />}
     </>
   );
 }
