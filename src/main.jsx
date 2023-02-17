@@ -46,10 +46,6 @@ const router = createBrowserRouter([
       {
         path: "/colors",
         element: <Colors />
-      },
-      {
-        path: '/top',
-        element: <Top />
       }
     ]
   }
