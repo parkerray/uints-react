@@ -43,6 +43,10 @@ export default function CombineV2() {
     }
   })
 
+  const hideClock = () => {
+    setCombineActive(true);
+  }
+
   const handleSelect = (token) => {
     if (getSum(selected) + token.normalized_metadata.attributes[0].value <= 9999) {
       setSelected(prevSelected => {
@@ -209,7 +213,7 @@ export default function CombineV2() {
         </div>
       </>)}
       </>
-    ) : <CombineClock />}
+    ) : <CombineClock hideClock={hideClock} />}
     </>
   );
 }

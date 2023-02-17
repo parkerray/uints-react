@@ -33,7 +33,6 @@ export default function Nav() {
           <img className='logo' src='/logo.svg' />
         </Link>
         <div className='nav-links'>
-          <Link to={`/top`}>Top</Link>
           <Link to={`/about`}>About</Link>
           <Link to={`/combine`}>Combine</Link>
           <Web3Button icon='hide' label='CONNECT' />
