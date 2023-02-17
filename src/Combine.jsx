@@ -1,6 +1,5 @@
 import Segments from './Segments';
 import TokenCard from './TokenCard';
-import { CombineClock, getMinutes} from './CombineClock';
 import './Combine.css';
 import { useState, useEffect } from 'react';
 import { getOwnedNfts, refresh, getNftMetadata } from '../moralis';
@@ -15,7 +14,6 @@ export default function Combine() {
   const [selected, setSelected] = useState([]);
   const [revealToken, setRevealToken] = useState(false);
   const [newToken, setNewToken] = useState();
-  const [combineActive, setCombineActive] = useState();
   const [syncError, setSyncError] = useState(false);
 
   const { isConnected, address } = useAccount();
@@ -27,12 +25,6 @@ export default function Combine() {
     'You summed some sums'
   ]
 
-  useEffect(() => {
-    if (getMinutes() < 1) {
-      setCombineActive(true);
-    }
-  }, [combineActive])
-
   const { config } = usePrepareContractWrite({
     address: '0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407',
     abi: [{"inputs":[{"internalType":"uint256[]","name":"tokens","type":"uint256[]"}],"name":"combine","outputs":[],"stateMutability":"nonpayable","type":"function"}],
@@ -42,7 +34,7 @@ export default function Combine() {
 
   const { data, write } = useContractWrite(config);
 
-  const { isLoading, isSuccess } = useWaitForTransaction({
+  const { isLoading, isSuccess, isError } = useWaitForTransaction({
     hash: data?.hash,
     onSuccess(data) {
       const attemptRefresh = async () => {
@@ -102,9 +94,6 @@ export default function Combine() {
   }
 
   const fetchData = async () => {
-    if (!combineActive) {
-      return;
-    }
     const result = await getOwnedNfts(address,tokensPageKey);
     setTotalTokens(result.total);
     if (result.total > tokens.length) {
@@ -128,12 +117,10 @@ export default function Combine() {
 
   useEffect(() => {
     fetchData();
-  }, [isConnected, address, combineActive]);
+  }, [isConnected, address]);
 
   return (
     <>
-    {combineActive ? (
-      <>
         <div className="combine-page-outer">
         <div className="combine-page-inner">
           <div className="token-select-wrapper">
@@ -164,6 +151,7 @@ export default function Combine() {
             </div>)}
             {(tokens.length == 0 && isConnected) || (!isConnected) && (<p>Connect a wallet with UINTS to combine</p>)}
             <div className='load-more'>
+              <a className='button-outline' href='/about/combining'>About Combining</a>
               {(totalTokens > tokens.length && tokens.length != 0) && (<button onClick={loadMore} className='button-outline'>Load more</button>)}
             </div>
           </div>
@@ -229,8 +217,6 @@ export default function Combine() {
           </div>
         </div>
       </>)}
-      </>
-    ) : <CombineClock />}
     </>
   );
 }

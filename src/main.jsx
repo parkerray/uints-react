@@ -5,6 +5,7 @@ import MintPage from './MintPage'
 import Top from './Top'
 import About from './About'
 import Combine from './Combine'
+import { CombineClock } from './CombineClock'
 import Colors from './Colors'
 import Root from './routes/root'
 import ErrorPage from './error-page'
@@ -40,15 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/combine",
-        element: <Combine />
+        element: <CombineClock />
       },
       {
         path: "/colors",
         element: <Colors />
-      },
-      {
-        path: '/top',
-        element: <Top />
       }
     ]
   }

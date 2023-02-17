@@ -1,5 +1,6 @@
 import Segments from "./Segments";
 import { useState, useEffect } from "react";
+import './Combine.css';
 
 export function getMinutes() {
 
@@ -44,11 +45,27 @@ export function CombineClock() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (minutesRemaining === 0) {
+      const loadTimer = setInterval(() => {
+        window.location.reload();
+      }, 20000);
+  
+      return () => clearInterval(loadTimer);
+    }
+  }, [minutesRemaining]);
+  
+
   return (
     <div className='clock-wrapper'>
       <div className='clock-inner'>
-        <Segments value={minutesRemaining} colors={colors} />
-        <a className='button-outline' href='/about/combining'>About combining</a>
+        { minutesRemaining > 0
+        ? <>
+          <Segments value={minutesRemaining} colors={colors} />
+          <a className='button-outline' href='/about/combining'>About combining</a>
+        </>
+        : <div className='spinner'><img src='/public/loading-ordered.svg' /></div>
+        }
       </div>
     </div>
   )
