@@ -6,6 +6,8 @@ export async function getOwnedNfts(address,pageKey) {
     url = `https://deep-index.moralis.io/api/v2/${address}/nft?chain=eth&format=decimal&disable_total=false&token_addresses%5B0%5D=0x7C10C8816575e8Fdfb11463dD3811Cc794A1D407&cursor=${pageKey}&normalizeMetadata=true`;
   }
 
+  console.log(process.env.VITE_TESTING)
+
   return fetch(url, {
     method: 'GET',
     headers: {
