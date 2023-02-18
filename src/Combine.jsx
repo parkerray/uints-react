@@ -194,7 +194,7 @@ export default function Combine() {
           <div className="modal-inner">
             {isLoading && (
               <div className='loading-wrapper'>
-                <img className='spinner' src='/public/loading-ordered.svg' />
+                <img className='spinner' src='/loading-ordered.svg' />
                 <div>Combining your UINTS...</div>
               </div>
             )}
