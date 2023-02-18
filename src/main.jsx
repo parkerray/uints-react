@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/combine",
-        element: <CombineClock />
+        element: <Combine />
       },
       {
         path: "/colors",
