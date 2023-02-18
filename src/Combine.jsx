@@ -127,7 +127,7 @@ export default function Combine() {
             <div className="token-select-header">
               <div className='header-left'>
                 <h1>Combine Uints</h1>
-                <div>{selected.length < 1 ? `Choose a token to keep (make sure it's delisted first)` : `Keeping ${selected[0].normalized_metadata.name}, now choose tokens to combine (burn)`}</div>
+                <div>{selected.length < 1 ? `Choose a token to keep (delist first if you don't want it to sell by mistake)` : `Keeping ${selected[0].normalized_metadata.name}, now choose tokens to combine (burn)`}</div>
               </div>
               <div className='header-right mobile-hide'>
                 <Segments value={getSum(selected)} colors={selected.length > 0 ? getTokenColors(selected[0].normalized_metadata.attributes[4].value) : [255,255,255]} />
