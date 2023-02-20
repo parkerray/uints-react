@@ -22,7 +22,19 @@ export default function Combine() {
     'Can I get your number?',
     'That was calculated',
     'Way to make it count',
-    'You summed some sums'
+    'You summed some sums',
+    'That is sum number',
+    'Computation success',
+    'The math is mathing',
+    'You are a combinooooooooooor',
+    'Only a wizard could summon such sums',
+    'A symphony of color and sum has emerged',
+    'It all adds up',
+    `Isn't math fun?`,
+    'Growth requires sacrifice',
+    'You have successfully created a piece of art',
+    'Strength in numbers',
+    
   ]
 
   const { config } = usePrepareContractWrite({
